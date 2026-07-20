@@ -9,7 +9,7 @@ const fetchDatabase = async function () {
   }
 };
 
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const renderCartItem = () => {
   const listCartProducts = document.querySelector("#listCartProducts");
@@ -106,8 +106,9 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                 answer = prompt("Opere su tarjeta.");
               }
 
-              renderCartItem();
               localStorage.setItem("cart", JSON.stringify([]));
+              cart = []
+              renderCartItem();
 
               const confirm = Modal({
                 context: "Gracias por su compra!",
@@ -216,7 +217,7 @@ document
       li.innerHTML = `
         <div data-id="cardProduct" class="max-w-[230px] overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md">
           <div class="relative h-48 bg-gray-100">
-            <img src="../public/image-card-background.jpg" alt="Product" class="h-full w-full object-cover" />
+            <img src="public/image-card-background.jpg" alt="Product" class="h-full w-full object-cover" />
           </div>
           <div class="p-6">
             <h3 class="text-lg text-gray-400">${product.name}</h3>
@@ -260,8 +261,6 @@ document
           product.unit = target.querySelector("span#unit").textContent.trim();
 
           let currentCount;
-
-          console.log(product.unit.trim());
 
           if (product.unit.toLowerCase() === "kg") {
             currentCount = parseFloat(prompt("¿Cuantos kilogramos?"));
