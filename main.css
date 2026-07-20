@@ -1,0 +1,13 @@
+body {
+  background-color: #F3F4F680;
+}
+
+#renderProductsList {
+  height: calc(100vh - 250px);
+  overflow-y: auto;
+}
+
+#listCartProducts {
+  height: calc(100vh - 250px);
+  overflow-y: auto;
+}

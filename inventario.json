@@ -1,0 +1,3704 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "category": "Abarrotes",
+      "name": "Arroz",
+      "price": {
+        "cost": 4500,
+        "current": 5700,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 36,
+        "min": 7,
+        "max": 130
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 7,
+        "favorite": false,
+        "views": 59,
+        "rating": 3.6
+      },
+      "listImage": [],
+      "sku": "ABA-0001",
+      "barcode": "7801000000001",
+      "brand": "Lucchetti",
+      "description": "Arroz marca Lucchetti.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 2,
+      "category": "Abarrotes",
+      "name": "Fideos",
+      "price": {
+        "cost": 1300,
+        "current": 2130,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 119,
+        "min": 10,
+        "max": 87
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 17,
+        "favorite": false,
+        "views": 229,
+        "rating": 3.6
+      },
+      "listImage": [],
+      "sku": "ABA-0002",
+      "barcode": "7801000000002",
+      "brand": "Tucapel",
+      "description": "Fideos marca Tucapel.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 3,
+      "category": "Abarrotes",
+      "name": "Azúcar",
+      "price": {
+        "cost": 1000,
+        "current": 1310,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 16,
+        "min": 11,
+        "max": 88
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1550,
+        "newPrice": 1310,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 6,
+        "favorite": false,
+        "views": 102,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "ABA-0003",
+      "barcode": "7801000000003",
+      "brand": "Malloa",
+      "description": "Azúcar marca Malloa.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 4,
+      "category": "Abarrotes",
+      "name": "Harina",
+      "price": {
+        "cost": 1900,
+        "current": 2420,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 30,
+        "min": 14,
+        "max": 95
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 2850,
+        "newPrice": 2420,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 22,
+        "favorite": false,
+        "views": 73,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "ABA-0004",
+      "barcode": "7801000000004",
+      "brand": "Tucapel",
+      "description": "Harina marca Tucapel.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 5,
+      "category": "Abarrotes",
+      "name": "Aceite",
+      "price": {
+        "cost": 4600,
+        "current": 7450,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 62,
+        "min": 5,
+        "max": 108
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 18,
+        "favorite": false,
+        "views": 580,
+        "rating": 4.8
+      },
+      "listImage": [],
+      "sku": "ABA-0005",
+      "barcode": "7801000000005",
+      "brand": "Malloa",
+      "description": "Aceite marca Malloa.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 6,
+      "category": "Abarrotes",
+      "name": "Sal",
+      "price": {
+        "cost": 2200,
+        "current": 3140,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 108,
+        "min": 11,
+        "max": 98
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 3700,
+        "newPrice": 3140,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 5,
+        "favorite": false,
+        "views": 130,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "ABA-0006",
+      "barcode": "7801000000006",
+      "brand": "Lucchetti",
+      "description": "Sal marca Lucchetti.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 7,
+      "category": "Abarrotes",
+      "name": "Lentejas",
+      "price": {
+        "cost": 4900,
+        "current": 7120,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 32,
+        "min": 6,
+        "max": 104
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 30,
+        "favorite": false,
+        "views": 109,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "ABA-0007",
+      "barcode": "7801000000007",
+      "brand": "Carozzi",
+      "description": "Lentejas marca Carozzi.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 8,
+      "category": "Abarrotes",
+      "name": "Garbanzos",
+      "price": {
+        "cost": 2600,
+        "current": 3270,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 50,
+        "min": 14,
+        "max": 87
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 220,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "ABA-0008",
+      "barcode": "7801000000008",
+      "brand": "Tucapel",
+      "description": "Garbanzos marca Tucapel.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 9,
+      "category": "Abarrotes",
+      "name": "Porotos",
+      "price": {
+        "cost": 2700,
+        "current": 4210,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 98,
+        "min": 10,
+        "max": 139
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 14,
+        "favorite": false,
+        "views": 474,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "ABA-0009",
+      "barcode": "7801000000009",
+      "brand": "Malloa",
+      "description": "Porotos marca Malloa.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 10,
+      "category": "Abarrotes",
+      "name": "Atún",
+      "price": {
+        "cost": 3900,
+        "current": 4970,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 15,
+        "min": 7,
+        "max": 111
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 17,
+        "favorite": false,
+        "views": 598,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "ABA-0010",
+      "barcode": "7801000000010",
+      "brand": "Carozzi",
+      "description": "Atún marca Carozzi.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 11,
+      "category": "Abarrotes",
+      "name": "Salsa de tomate",
+      "price": {
+        "cost": 2300,
+        "current": 3900,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 115,
+        "min": 10,
+        "max": 137
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 11,
+        "favorite": false,
+        "views": 84,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "ABA-0011",
+      "barcode": "7801000000011",
+      "brand": "Malloa",
+      "description": "Salsa de tomate marca Malloa.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 12,
+      "category": "Abarrotes",
+      "name": "Mayonesa",
+      "price": {
+        "cost": 4100,
+        "current": 4580,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 89,
+        "min": 7,
+        "max": 123
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 5390,
+        "newPrice": 4580,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 7,
+        "favorite": false,
+        "views": 510,
+        "rating": 4.1
+      },
+      "listImage": [],
+      "sku": "ABA-0012",
+      "barcode": "7801000000012",
+      "brand": "Malloa",
+      "description": "Mayonesa marca Malloa.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 13,
+      "category": "Abarrotes",
+      "name": "Ketchup",
+      "price": {
+        "cost": 2300,
+        "current": 4110,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 115,
+        "min": 13,
+        "max": 120
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 3,
+        "favorite": false,
+        "views": 368,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "ABA-0013",
+      "barcode": "7801000000013",
+      "brand": "Tucapel",
+      "description": "Ketchup marca Tucapel.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 14,
+      "category": "Abarrotes",
+      "name": "Mostaza",
+      "price": {
+        "cost": 2900,
+        "current": 3960,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 51,
+        "min": 6,
+        "max": 91
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 5,
+        "favorite": false,
+        "views": 495,
+        "rating": 4.5
+      },
+      "listImage": [],
+      "sku": "ABA-0014",
+      "barcode": "7801000000014",
+      "brand": "Malloa",
+      "description": "Mostaza marca Malloa.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 15,
+      "category": "Abarrotes",
+      "name": "Café",
+      "price": {
+        "cost": 2800,
+        "current": 3950,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 94,
+        "min": 5,
+        "max": 119
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 466,
+        "rating": 3.9
+      },
+      "listImage": [],
+      "sku": "ABA-0015",
+      "barcode": "7801000000015",
+      "brand": "Tucapel",
+      "description": "Café marca Tucapel.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 16,
+      "category": "Abarrotes",
+      "name": "Té",
+      "price": {
+        "cost": 4800,
+        "current": 7620,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 26,
+        "min": 15,
+        "max": 124
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 17,
+        "favorite": false,
+        "views": 482,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "ABA-0016",
+      "barcode": "7801000000016",
+      "brand": "Malloa",
+      "description": "Té marca Malloa.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 17,
+      "category": "Abarrotes",
+      "name": "Chocolate en polvo",
+      "price": {
+        "cost": 2000,
+        "current": 2590,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 86,
+        "min": 12,
+        "max": 87
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 22,
+        "favorite": false,
+        "views": 304,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "ABA-0017",
+      "barcode": "7801000000017",
+      "brand": "Tucapel",
+      "description": "Chocolate en polvo marca Tucapel.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 18,
+      "category": "Abarrotes",
+      "name": "Avena",
+      "price": {
+        "cost": 4000,
+        "current": 5320,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 103,
+        "min": 11,
+        "max": 130
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 24,
+        "favorite": false,
+        "views": 92,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "ABA-0018",
+      "barcode": "7801000000018",
+      "brand": "Carozzi",
+      "description": "Avena marca Carozzi.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 19,
+      "category": "Abarrotes",
+      "name": "Cereal",
+      "price": {
+        "cost": 800,
+        "current": 900,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 45,
+        "min": 13,
+        "max": 115
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1060,
+        "newPrice": 900,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 12,
+        "favorite": false,
+        "views": 450,
+        "rating": 4.8
+      },
+      "listImage": [],
+      "sku": "ABA-0019",
+      "barcode": "7801000000019",
+      "brand": "Malloa",
+      "description": "Cereal marca Malloa.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 20,
+      "category": "Abarrotes",
+      "name": "Pan rallado",
+      "price": {
+        "cost": 2200,
+        "current": 2720,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 77,
+        "min": 11,
+        "max": 125
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 28,
+        "favorite": false,
+        "views": 399,
+        "rating": 4.9
+      },
+      "listImage": [],
+      "sku": "ABA-0020",
+      "barcode": "7801000000020",
+      "brand": "Lucchetti",
+      "description": "Pan rallado marca Lucchetti.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 21,
+      "category": "Bebidas",
+      "name": "Coca-Cola 1.5L",
+      "price": {
+        "cost": 2500,
+        "current": 3310,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 118,
+        "min": 6,
+        "max": 102
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 247,
+        "rating": 4.5
+      },
+      "listImage": [],
+      "sku": "BEB-0021",
+      "barcode": "7801000000021",
+      "brand": "CCU",
+      "description": "Coca-Cola 1.5L marca CCU.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 22,
+      "category": "Bebidas",
+      "name": "Coca-Cola Zero",
+      "price": {
+        "cost": 4600,
+        "current": 6780,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 36,
+        "min": 12,
+        "max": 103
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 23,
+        "favorite": false,
+        "views": 298,
+        "rating": 3.5
+      },
+      "listImage": [],
+      "sku": "BEB-0022",
+      "barcode": "7801000000022",
+      "brand": "Coca-Cola",
+      "description": "Coca-Cola Zero marca Coca-Cola.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 23,
+      "category": "Bebidas",
+      "name": "Sprite",
+      "price": {
+        "cost": 4000,
+        "current": 6090,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 59,
+        "min": 13,
+        "max": 127
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 28,
+        "favorite": false,
+        "views": 589,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "BEB-0023",
+      "barcode": "7801000000023",
+      "brand": "Andina",
+      "description": "Sprite marca Andina.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 24,
+      "category": "Bebidas",
+      "name": "Fanta",
+      "price": {
+        "cost": 4200,
+        "current": 6040,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 22,
+        "min": 13,
+        "max": 86
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 16,
+        "favorite": false,
+        "views": 582,
+        "rating": 4.1
+      },
+      "listImage": [],
+      "sku": "BEB-0024",
+      "barcode": "7801000000024",
+      "brand": "CCU",
+      "description": "Fanta marca CCU.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 25,
+      "category": "Bebidas",
+      "name": "Pepsi",
+      "price": {
+        "cost": 3600,
+        "current": 3830,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 19,
+        "min": 11,
+        "max": 93
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 4510,
+        "newPrice": 3830,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 4,
+        "favorite": false,
+        "views": 420,
+        "rating": 3.6
+      },
+      "listImage": [],
+      "sku": "BEB-0025",
+      "barcode": "7801000000025",
+      "brand": "Andina",
+      "description": "Pepsi marca Andina.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 26,
+      "category": "Bebidas",
+      "name": "Bilz",
+      "price": {
+        "cost": 4500,
+        "current": 5830,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 81,
+        "min": 8,
+        "max": 136
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 2,
+        "favorite": false,
+        "views": 122,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "BEB-0026",
+      "barcode": "7801000000026",
+      "brand": "Coca-Cola",
+      "description": "Bilz marca Coca-Cola.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 27,
+      "category": "Bebidas",
+      "name": "Pap",
+      "price": {
+        "cost": 2900,
+        "current": 4140,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 72,
+        "min": 6,
+        "max": 80
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 8,
+        "favorite": false,
+        "views": 164,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "BEB-0027",
+      "barcode": "7801000000027",
+      "brand": "Coca-Cola",
+      "description": "Pap marca Coca-Cola.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 28,
+      "category": "Bebidas",
+      "name": "Agua mineral",
+      "price": {
+        "cost": 4000,
+        "current": 5830,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 97,
+        "min": 14,
+        "max": 83
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 6860,
+        "newPrice": 5830,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 3,
+        "favorite": false,
+        "views": 222,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "BEB-0028",
+      "barcode": "7801000000028",
+      "brand": "Watts",
+      "description": "Agua mineral marca Watts.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 29,
+      "category": "Bebidas",
+      "name": "Agua con gas",
+      "price": {
+        "cost": 4800,
+        "current": 8300,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 103,
+        "min": 15,
+        "max": 112
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 20,
+        "favorite": false,
+        "views": 382,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "BEB-0029",
+      "barcode": "7801000000029",
+      "brand": "CCU",
+      "description": "Agua con gas marca CCU.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 30,
+      "category": "Bebidas",
+      "name": "Jugo Andina",
+      "price": {
+        "cost": 2600,
+        "current": 3290,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 63,
+        "min": 12,
+        "max": 139
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 0,
+        "favorite": false,
+        "views": 505,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "BEB-0030",
+      "barcode": "7801000000030",
+      "brand": "Coca-Cola",
+      "description": "Jugo Andina marca Coca-Cola.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 31,
+      "category": "Bebidas",
+      "name": "Néctar Watts",
+      "price": {
+        "cost": 2100,
+        "current": 3740,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 69,
+        "min": 6,
+        "max": 123
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 281,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "BEB-0031",
+      "barcode": "7801000000031",
+      "brand": "CCU",
+      "description": "Néctar Watts marca CCU.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 32,
+      "category": "Bebidas",
+      "name": "Monster",
+      "price": {
+        "cost": 1100,
+        "current": 1890,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 86,
+        "min": 13,
+        "max": 82
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 16,
+        "favorite": false,
+        "views": 550,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "BEB-0032",
+      "barcode": "7801000000032",
+      "brand": "CCU",
+      "description": "Monster marca CCU.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 33,
+      "category": "Bebidas",
+      "name": "Red Bull",
+      "price": {
+        "cost": 4300,
+        "current": 5670,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 25,
+        "min": 13,
+        "max": 118
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 17,
+        "favorite": false,
+        "views": 103,
+        "rating": 4.5
+      },
+      "listImage": [],
+      "sku": "BEB-0033",
+      "barcode": "7801000000033",
+      "brand": "Coca-Cola",
+      "description": "Red Bull marca Coca-Cola.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 34,
+      "category": "Bebidas",
+      "name": "Gatorade",
+      "price": {
+        "cost": 3800,
+        "current": 6650,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 67,
+        "min": 13,
+        "max": 126
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 0,
+        "favorite": false,
+        "views": 374,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "BEB-0034",
+      "barcode": "7801000000034",
+      "brand": "Watts",
+      "description": "Gatorade marca Watts.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 35,
+      "category": "Bebidas",
+      "name": "Powerade",
+      "price": {
+        "cost": 1200,
+        "current": 2100,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 111,
+        "min": 15,
+        "max": 108
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 25,
+        "favorite": false,
+        "views": 209,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "BEB-0035",
+      "barcode": "7801000000035",
+      "brand": "Watts",
+      "description": "Powerade marca Watts.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 36,
+      "category": "Bebidas",
+      "name": "Té helado",
+      "price": {
+        "cost": 2400,
+        "current": 3220,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 77,
+        "min": 8,
+        "max": 105
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 30,
+        "favorite": false,
+        "views": 514,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "BEB-0036",
+      "barcode": "7801000000036",
+      "brand": "Andina",
+      "description": "Té helado marca Andina.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 37,
+      "category": "Bebidas",
+      "name": "Soda",
+      "price": {
+        "cost": 1000,
+        "current": 1250,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 13,
+        "min": 5,
+        "max": 115
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 24,
+        "favorite": false,
+        "views": 275,
+        "rating": 3.8
+      },
+      "listImage": [],
+      "sku": "BEB-0037",
+      "barcode": "7801000000037",
+      "brand": "Coca-Cola",
+      "description": "Soda marca Coca-Cola.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 38,
+      "category": "Bebidas",
+      "name": "Jugo Natural",
+      "price": {
+        "cost": 3900,
+        "current": 5490,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 65,
+        "min": 12,
+        "max": 124
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 6470,
+        "newPrice": 5490,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 30,
+        "favorite": false,
+        "views": 92,
+        "rating": 3.8
+      },
+      "listImage": [],
+      "sku": "BEB-0038",
+      "barcode": "7801000000038",
+      "brand": "Watts",
+      "description": "Jugo Natural marca Watts.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 39,
+      "category": "Lácteos",
+      "name": "Leche Entera",
+      "price": {
+        "cost": 4000,
+        "current": 5190,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 82,
+        "min": 12,
+        "max": 105
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 13,
+        "favorite": false,
+        "views": 219,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "LÁC-0039",
+      "barcode": "7801000000039",
+      "brand": "Soprole",
+      "description": "Leche Entera marca Soprole.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 40,
+      "category": "Lácteos",
+      "name": "Leche Descremada",
+      "price": {
+        "cost": 1800,
+        "current": 3160,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 93,
+        "min": 5,
+        "max": 141
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 6,
+        "favorite": false,
+        "views": 362,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "LÁC-0040",
+      "barcode": "7801000000040",
+      "brand": "Nestlé",
+      "description": "Leche Descremada marca Nestlé.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 41,
+      "category": "Lácteos",
+      "name": "Yogurt",
+      "price": {
+        "cost": 2400,
+        "current": 3450,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 52,
+        "min": 15,
+        "max": 95
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 14,
+        "favorite": false,
+        "views": 214,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "LÁC-0041",
+      "barcode": "7801000000041",
+      "brand": "Soprole",
+      "description": "Yogurt marca Soprole.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 42,
+      "category": "Lácteos",
+      "name": "Queso Gauda",
+      "price": {
+        "cost": 3800,
+        "current": 5580,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 13,
+        "min": 11,
+        "max": 122
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 10,
+        "favorite": false,
+        "views": 415,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "LÁC-0042",
+      "barcode": "7801000000042",
+      "brand": "Soprole",
+      "description": "Queso Gauda marca Soprole.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 43,
+      "category": "Lácteos",
+      "name": "Quesillo",
+      "price": {
+        "cost": 600,
+        "current": 930,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 33,
+        "min": 6,
+        "max": 100
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 0,
+        "favorite": false,
+        "views": 140,
+        "rating": 3.5
+      },
+      "listImage": [],
+      "sku": "LÁC-0043",
+      "barcode": "7801000000043",
+      "brand": "Nestlé",
+      "description": "Quesillo marca Nestlé.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 44,
+      "category": "Lácteos",
+      "name": "Mantequilla",
+      "price": {
+        "cost": 900,
+        "current": 1240,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 13,
+        "min": 12,
+        "max": 98
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1460,
+        "newPrice": 1240,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 28,
+        "favorite": false,
+        "views": 495,
+        "rating": 4.5
+      },
+      "listImage": [],
+      "sku": "LÁC-0044",
+      "barcode": "7801000000044",
+      "brand": "Nestlé",
+      "description": "Mantequilla marca Nestlé.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 45,
+      "category": "Lácteos",
+      "name": "Crema",
+      "price": {
+        "cost": 700,
+        "current": 1020,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 35,
+        "min": 7,
+        "max": 150
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1200,
+        "newPrice": 1020,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 8,
+        "favorite": false,
+        "views": 144,
+        "rating": 3.5
+      },
+      "listImage": [],
+      "sku": "LÁC-0045",
+      "barcode": "7801000000045",
+      "brand": "Colun",
+      "description": "Crema marca Colun.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 46,
+      "category": "Lácteos",
+      "name": "Manjar",
+      "price": {
+        "cost": 4700,
+        "current": 7000,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 97,
+        "min": 15,
+        "max": 93
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 152,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "LÁC-0046",
+      "barcode": "7801000000046",
+      "brand": "Nestlé",
+      "description": "Manjar marca Nestlé.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 47,
+      "category": "Lácteos",
+      "name": "Leche condensada",
+      "price": {
+        "cost": 4100,
+        "current": 6330,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 65,
+        "min": 8,
+        "max": 83
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 25,
+        "favorite": false,
+        "views": 227,
+        "rating": 3.9
+      },
+      "listImage": [],
+      "sku": "LÁC-0047",
+      "barcode": "7801000000047",
+      "brand": "Soprole",
+      "description": "Leche condensada marca Soprole.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 48,
+      "category": "Lácteos",
+      "name": "Queso rallado",
+      "price": {
+        "cost": 3100,
+        "current": 3450,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 60,
+        "min": 14,
+        "max": 121
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 4070,
+        "newPrice": 3450,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 11,
+        "favorite": false,
+        "views": 567,
+        "rating": 4.1
+      },
+      "listImage": [],
+      "sku": "LÁC-0048",
+      "barcode": "7801000000048",
+      "brand": "Soprole",
+      "description": "Queso rallado marca Soprole.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 49,
+      "category": "Lácteos",
+      "name": "Leche chocolatada",
+      "price": {
+        "cost": 3200,
+        "current": 4620,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 11,
+        "min": 5,
+        "max": 125
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 21,
+        "favorite": false,
+        "views": 539,
+        "rating": 4.1
+      },
+      "listImage": [],
+      "sku": "LÁC-0049",
+      "barcode": "7801000000049",
+      "brand": "Soprole",
+      "description": "Leche chocolatada marca Soprole.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 50,
+      "category": "Lácteos",
+      "name": "Yogurt griego",
+      "price": {
+        "cost": 4600,
+        "current": 6990,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 56,
+        "min": 7,
+        "max": 148
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 8230,
+        "newPrice": 6990,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 23,
+        "favorite": false,
+        "views": 546,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "LÁC-0050",
+      "barcode": "7801000000050",
+      "brand": "Nestlé",
+      "description": "Yogurt griego marca Nestlé.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 51,
+      "category": "Lácteos",
+      "name": "Kefir",
+      "price": {
+        "cost": 2600,
+        "current": 3700,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 29,
+        "min": 7,
+        "max": 80
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 4360,
+        "newPrice": 3700,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 6,
+        "favorite": false,
+        "views": 186,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "LÁC-0051",
+      "barcode": "7801000000051",
+      "brand": "Colun",
+      "description": "Kefir marca Colun.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 52,
+      "category": "Lácteos",
+      "name": "Margarina",
+      "price": {
+        "cost": 3900,
+        "current": 5720,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 40,
+        "min": 6,
+        "max": 87
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 14,
+        "favorite": false,
+        "views": 540,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "LÁC-0052",
+      "barcode": "7801000000052",
+      "brand": "Nestlé",
+      "description": "Margarina marca Nestlé.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 53,
+      "category": "Lácteos",
+      "name": "Postre de leche",
+      "price": {
+        "cost": 2000,
+        "current": 2920,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 108,
+        "min": 6,
+        "max": 87
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 3440,
+        "newPrice": 2920,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 205,
+        "rating": 3.9
+      },
+      "listImage": [],
+      "sku": "LÁC-0053",
+      "barcode": "7801000000053",
+      "brand": "Colun",
+      "description": "Postre de leche marca Colun.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 54,
+      "category": "Frutas y Verduras",
+      "name": "Papa",
+      "price": {
+        "cost": 4000,
+        "current": 5030,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 74,
+        "min": 13,
+        "max": 137
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 26,
+        "favorite": false,
+        "views": 38,
+        "rating": 4.6
+      },
+      "listImage": [],
+      "sku": "FRU-0054",
+      "barcode": "7801000000054",
+      "brand": "Huerto Local",
+      "description": "Papa marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 55,
+      "category": "Frutas y Verduras",
+      "name": "Tomate",
+      "price": {
+        "cost": 500,
+        "current": 890,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 113,
+        "min": 12,
+        "max": 121
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 7,
+        "favorite": false,
+        "views": 527,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "FRU-0055",
+      "barcode": "7801000000055",
+      "brand": "Huerto Local",
+      "description": "Tomate marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 56,
+      "category": "Frutas y Verduras",
+      "name": "Cebolla",
+      "price": {
+        "cost": 1500,
+        "current": 2160,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 115,
+        "min": 9,
+        "max": 137
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 12,
+        "favorite": false,
+        "views": 556,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "FRU-0056",
+      "barcode": "7801000000056",
+      "brand": "Huerto Local",
+      "description": "Cebolla marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 57,
+      "category": "Frutas y Verduras",
+      "name": "Zanahoria",
+      "price": {
+        "cost": 800,
+        "current": 870,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 54,
+        "min": 13,
+        "max": 113
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1030,
+        "newPrice": 870,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 8,
+        "favorite": false,
+        "views": 217,
+        "rating": 4.8
+      },
+      "listImage": [],
+      "sku": "FRU-0057",
+      "barcode": "7801000000057",
+      "brand": "Huerto Local",
+      "description": "Zanahoria marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 58,
+      "category": "Frutas y Verduras",
+      "name": "Limón",
+      "price": {
+        "cost": 3400,
+        "current": 4660,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 98,
+        "min": 11,
+        "max": 95
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 25,
+        "favorite": false,
+        "views": 462,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "FRU-0058",
+      "barcode": "7801000000058",
+      "brand": "Huerto Local",
+      "description": "Limón marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 59,
+      "category": "Frutas y Verduras",
+      "name": "Naranja",
+      "price": {
+        "cost": 4000,
+        "current": 6380,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 29,
+        "min": 11,
+        "max": 89
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 9,
+        "favorite": false,
+        "views": 320,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "FRU-0059",
+      "barcode": "7801000000059",
+      "brand": "Huerto Local",
+      "description": "Naranja marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 60,
+      "category": "Frutas y Verduras",
+      "name": "Manzana",
+      "price": {
+        "cost": 1800,
+        "current": 3200,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 74,
+        "min": 15,
+        "max": 126
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 1,
+        "favorite": false,
+        "views": 269,
+        "rating": 4.8
+      },
+      "listImage": [],
+      "sku": "FRU-0060",
+      "barcode": "7801000000060",
+      "brand": "Huerto Local",
+      "description": "Manzana marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 61,
+      "category": "Frutas y Verduras",
+      "name": "Pera",
+      "price": {
+        "cost": 2500,
+        "current": 3080,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 69,
+        "min": 8,
+        "max": 92
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 508,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "FRU-0061",
+      "barcode": "7801000000061",
+      "brand": "Huerto Local",
+      "description": "Pera marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 62,
+      "category": "Frutas y Verduras",
+      "name": "Plátano",
+      "price": {
+        "cost": 3800,
+        "current": 4910,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 15,
+        "min": 7,
+        "max": 135
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 423,
+        "rating": 4.0
+      },
+      "listImage": [],
+      "sku": "FRU-0062",
+      "barcode": "7801000000062",
+      "brand": "Huerto Local",
+      "description": "Plátano marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 63,
+      "category": "Frutas y Verduras",
+      "name": "Uva",
+      "price": {
+        "cost": 1600,
+        "current": 1680,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 115,
+        "min": 10,
+        "max": 120
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1980,
+        "newPrice": 1680,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 7,
+        "favorite": false,
+        "views": 384,
+        "rating": 3.5
+      },
+      "listImage": [],
+      "sku": "FRU-0063",
+      "barcode": "7801000000063",
+      "brand": "Huerto Local",
+      "description": "Uva marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 64,
+      "category": "Frutas y Verduras",
+      "name": "Lechuga",
+      "price": {
+        "cost": 3000,
+        "current": 3810,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 36,
+        "min": 12,
+        "max": 82
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 18,
+        "favorite": false,
+        "views": 349,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "FRU-0064",
+      "barcode": "7801000000064",
+      "brand": "Huerto Local",
+      "description": "Lechuga marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 65,
+      "category": "Frutas y Verduras",
+      "name": "Espinaca",
+      "price": {
+        "cost": 4300,
+        "current": 4470,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 89,
+        "min": 13,
+        "max": 88
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 5260,
+        "newPrice": 4470,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 18,
+        "favorite": false,
+        "views": 244,
+        "rating": 5.0
+      },
+      "listImage": [],
+      "sku": "FRU-0065",
+      "barcode": "7801000000065",
+      "brand": "Huerto Local",
+      "description": "Espinaca marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 66,
+      "category": "Frutas y Verduras",
+      "name": "Palta",
+      "price": {
+        "cost": 4100,
+        "current": 6200,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 31,
+        "min": 6,
+        "max": 113
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 21,
+        "favorite": false,
+        "views": 50,
+        "rating": 4.9
+      },
+      "listImage": [],
+      "sku": "FRU-0066",
+      "barcode": "7801000000066",
+      "brand": "Huerto Local",
+      "description": "Palta marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 67,
+      "category": "Frutas y Verduras",
+      "name": "Pimentón",
+      "price": {
+        "cost": 2500,
+        "current": 3350,
+        "unit": "kg"
+      },
+      "stock": {
+        "quantity": 90,
+        "min": 9,
+        "max": 96
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 20,
+        "favorite": false,
+        "views": 274,
+        "rating": 4.1
+      },
+      "listImage": [],
+      "sku": "FRU-0067",
+      "barcode": "7801000000067",
+      "brand": "Huerto Local",
+      "description": "Pimentón marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 68,
+      "category": "Frutas y Verduras",
+      "name": "Pepino",
+      "price": {
+        "cost": 2400,
+        "current": 3530,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 14,
+        "min": 10,
+        "max": 91
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 0,
+        "favorite": false,
+        "views": 68,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "FRU-0068",
+      "barcode": "7801000000068",
+      "brand": "Huerto Local",
+      "description": "Pepino marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 69,
+      "category": "Frutas y Verduras",
+      "name": "Brócoli",
+      "price": {
+        "cost": 3400,
+        "current": 5340,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 17,
+        "min": 11,
+        "max": 89
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 2,
+        "favorite": false,
+        "views": 27,
+        "rating": 4.5
+      },
+      "listImage": [],
+      "sku": "FRU-0069",
+      "barcode": "7801000000069",
+      "brand": "Huerto Local",
+      "description": "Brócoli marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 70,
+      "category": "Frutas y Verduras",
+      "name": "Coliflor",
+      "price": {
+        "cost": 3900,
+        "current": 5170,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 49,
+        "min": 6,
+        "max": 108
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 28,
+        "favorite": false,
+        "views": 280,
+        "rating": 4.8
+      },
+      "listImage": [],
+      "sku": "FRU-0070",
+      "barcode": "7801000000070",
+      "brand": "Huerto Local",
+      "description": "Coliflor marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 71,
+      "category": "Frutas y Verduras",
+      "name": "Zapallo italiano",
+      "price": {
+        "cost": 900,
+        "current": 1550,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 25,
+        "min": 5,
+        "max": 123
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 14,
+        "favorite": false,
+        "views": 437,
+        "rating": 4.9
+      },
+      "listImage": [],
+      "sku": "FRU-0071",
+      "barcode": "7801000000071",
+      "brand": "Huerto Local",
+      "description": "Zapallo italiano marca Huerto Local.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 72,
+      "category": "Limpieza",
+      "name": "Cloro",
+      "price": {
+        "cost": 3900,
+        "current": 6320,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 108,
+        "min": 14,
+        "max": 96
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 20,
+        "favorite": false,
+        "views": 549,
+        "rating": 4.6
+      },
+      "listImage": [],
+      "sku": "LIM-0072",
+      "barcode": "7801000000072",
+      "brand": "Clorox",
+      "description": "Cloro marca Clorox.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 73,
+      "category": "Limpieza",
+      "name": "Detergente",
+      "price": {
+        "cost": 3800,
+        "current": 4570,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 43,
+        "min": 7,
+        "max": 113
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 195,
+        "rating": 3.8
+      },
+      "listImage": [],
+      "sku": "LIM-0073",
+      "barcode": "7801000000073",
+      "brand": "Virutex",
+      "description": "Detergente marca Virutex.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 74,
+      "category": "Limpieza",
+      "name": "Lavalozas",
+      "price": {
+        "cost": 4700,
+        "current": 5930,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 38,
+        "min": 15,
+        "max": 119
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 3,
+        "favorite": false,
+        "views": 220,
+        "rating": 3.9
+      },
+      "listImage": [],
+      "sku": "LIM-0074",
+      "barcode": "7801000000074",
+      "brand": "Clorox",
+      "description": "Lavalozas marca Clorox.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 75,
+      "category": "Limpieza",
+      "name": "Esponjas",
+      "price": {
+        "cost": 1100,
+        "current": 1530,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 41,
+        "min": 15,
+        "max": 102
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 1800,
+        "newPrice": 1530,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 19,
+        "favorite": false,
+        "views": 365,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "LIM-0075",
+      "barcode": "7801000000075",
+      "brand": "Omo",
+      "description": "Esponjas marca Omo.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 76,
+      "category": "Limpieza",
+      "name": "Bolsa de basura",
+      "price": {
+        "cost": 1800,
+        "current": 2930,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 86,
+        "min": 5,
+        "max": 81
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 527,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "LIM-0076",
+      "barcode": "7801000000076",
+      "brand": "Clorox",
+      "description": "Bolsa de basura marca Clorox.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 77,
+      "category": "Limpieza",
+      "name": "Limpiador piso",
+      "price": {
+        "cost": 2100,
+        "current": 3150,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 113,
+        "min": 13,
+        "max": 140
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 1,
+        "favorite": false,
+        "views": 467,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "LIM-0077",
+      "barcode": "7801000000077",
+      "brand": "Virutex",
+      "description": "Limpiador piso marca Virutex.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 78,
+      "category": "Limpieza",
+      "name": "Limpiavidrios",
+      "price": {
+        "cost": 1000,
+        "current": 1580,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 10,
+        "min": 11,
+        "max": 143
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 0,
+        "favorite": false,
+        "views": 412,
+        "rating": 5.0
+      },
+      "listImage": [],
+      "sku": "LIM-0078",
+      "barcode": "7801000000078",
+      "brand": "Omo",
+      "description": "Limpiavidrios marca Omo.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 79,
+      "category": "Limpieza",
+      "name": "Jabón barra",
+      "price": {
+        "cost": 2600,
+        "current": 4320,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 38,
+        "min": 8,
+        "max": 109
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 5,
+        "favorite": false,
+        "views": 213,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "LIM-0079",
+      "barcode": "7801000000079",
+      "brand": "Clorox",
+      "description": "Jabón barra marca Clorox.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 80,
+      "category": "Limpieza",
+      "name": "Jabón líquido",
+      "price": {
+        "cost": 3300,
+        "current": 5050,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 6,
+        "min": 15,
+        "max": 97
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 3,
+        "favorite": false,
+        "views": 365,
+        "rating": 5.0
+      },
+      "listImage": [],
+      "sku": "LIM-0080",
+      "barcode": "7801000000080",
+      "brand": "Omo",
+      "description": "Jabón líquido marca Omo.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 81,
+      "category": "Limpieza",
+      "name": "Suavizante",
+      "price": {
+        "cost": 900,
+        "current": 1590,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 24,
+        "min": 5,
+        "max": 89
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 17,
+        "favorite": false,
+        "views": 271,
+        "rating": 4.1
+      },
+      "listImage": [],
+      "sku": "LIM-0081",
+      "barcode": "7801000000081",
+      "brand": "Virutex",
+      "description": "Suavizante marca Virutex.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 82,
+      "category": "Limpieza",
+      "name": "Desinfectante",
+      "price": {
+        "cost": 700,
+        "current": 1190,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 23,
+        "min": 6,
+        "max": 128
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 13,
+        "favorite": false,
+        "views": 298,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "LIM-0082",
+      "barcode": "7801000000082",
+      "brand": "Virutex",
+      "description": "Desinfectante marca Virutex.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 83,
+      "category": "Limpieza",
+      "name": "Papel higiénico",
+      "price": {
+        "cost": 1300,
+        "current": 1590,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 106,
+        "min": 9,
+        "max": 85
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 199,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "LIM-0083",
+      "barcode": "7801000000083",
+      "brand": "Omo",
+      "description": "Papel higiénico marca Omo.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 84,
+      "category": "Limpieza",
+      "name": "Toalla nova",
+      "price": {
+        "cost": 700,
+        "current": 1210,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 36,
+        "min": 5,
+        "max": 113
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 21,
+        "favorite": false,
+        "views": 346,
+        "rating": 5.0
+      },
+      "listImage": [],
+      "sku": "LIM-0084",
+      "barcode": "7801000000084",
+      "brand": "Clorox",
+      "description": "Toalla nova marca Clorox.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 85,
+      "category": "Limpieza",
+      "name": "Servilletas",
+      "price": {
+        "cost": 1100,
+        "current": 1550,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 116,
+        "min": 10,
+        "max": 111
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 13,
+        "favorite": false,
+        "views": 326,
+        "rating": 3.8
+      },
+      "listImage": [],
+      "sku": "LIM-0085",
+      "barcode": "7801000000085",
+      "brand": "Omo",
+      "description": "Servilletas marca Omo.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 86,
+      "category": "Snacks y Dulces",
+      "name": "Papas Lays",
+      "price": {
+        "cost": 4400,
+        "current": 7250,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 35,
+        "min": 5,
+        "max": 122
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 95,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "SNA-0086",
+      "barcode": "7801000000086",
+      "brand": "Evercrisp",
+      "description": "Papas Lays marca Evercrisp.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 87,
+      "category": "Snacks y Dulces",
+      "name": "Doritos",
+      "price": {
+        "cost": 1500,
+        "current": 2670,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 117,
+        "min": 15,
+        "max": 105
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 13,
+        "favorite": false,
+        "views": 526,
+        "rating": 4.7
+      },
+      "listImage": [],
+      "sku": "SNA-0087",
+      "barcode": "7801000000087",
+      "brand": "Nestlé",
+      "description": "Doritos marca Nestlé.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 88,
+      "category": "Snacks y Dulces",
+      "name": "Cheetos",
+      "price": {
+        "cost": 600,
+        "current": 780,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 105,
+        "min": 9,
+        "max": 91
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 419,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "SNA-0088",
+      "barcode": "7801000000088",
+      "brand": "Evercrisp",
+      "description": "Cheetos marca Evercrisp.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 89,
+      "category": "Snacks y Dulces",
+      "name": "Ramitas",
+      "price": {
+        "cost": 3100,
+        "current": 5210,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 108,
+        "min": 5,
+        "max": 118
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 7,
+        "favorite": false,
+        "views": 248,
+        "rating": 3.6
+      },
+      "listImage": [],
+      "sku": "SNA-0089",
+      "barcode": "7801000000089",
+      "brand": "Costa",
+      "description": "Ramitas marca Costa.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 90,
+      "category": "Snacks y Dulces",
+      "name": "M&M",
+      "price": {
+        "cost": 2200,
+        "current": 2850,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 53,
+        "min": 7,
+        "max": 129
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 27,
+        "favorite": false,
+        "views": 516,
+        "rating": 3.7
+      },
+      "listImage": [],
+      "sku": "SNA-0090",
+      "barcode": "7801000000090",
+      "brand": "Nestlé",
+      "description": "M&M marca Nestlé.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 91,
+      "category": "Snacks y Dulces",
+      "name": "Snickers",
+      "price": {
+        "cost": 700,
+        "current": 1200,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 109,
+        "min": 14,
+        "max": 98
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 29,
+        "favorite": false,
+        "views": 535,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "SNA-0091",
+      "barcode": "7801000000091",
+      "brand": "Nestlé",
+      "description": "Snickers marca Nestlé.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 92,
+      "category": "Snacks y Dulces",
+      "name": "Super8",
+      "price": {
+        "cost": 3400,
+        "current": 4790,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 116,
+        "min": 13,
+        "max": 97
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 7,
+        "favorite": false,
+        "views": 526,
+        "rating": 4.4
+      },
+      "listImage": [],
+      "sku": "SNA-0092",
+      "barcode": "7801000000092",
+      "brand": "Nestlé",
+      "description": "Super8 marca Nestlé.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 93,
+      "category": "Snacks y Dulces",
+      "name": "Chokita",
+      "price": {
+        "cost": 1900,
+        "current": 1950,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 47,
+        "min": 15,
+        "max": 109
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 2300,
+        "newPrice": 1950,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 8,
+        "favorite": false,
+        "views": 41,
+        "rating": 3.6
+      },
+      "listImage": [],
+      "sku": "SNA-0093",
+      "barcode": "7801000000093",
+      "brand": "Evercrisp",
+      "description": "Chokita marca Evercrisp.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 94,
+      "category": "Snacks y Dulces",
+      "name": "Golpe",
+      "price": {
+        "cost": 900,
+        "current": 1600,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 87,
+        "min": 10,
+        "max": 93
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 16,
+        "favorite": false,
+        "views": 472,
+        "rating": 4.3
+      },
+      "listImage": [],
+      "sku": "SNA-0094",
+      "barcode": "7801000000094",
+      "brand": "Nestlé",
+      "description": "Golpe marca Nestlé.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 95,
+      "category": "Snacks y Dulces",
+      "name": "Oreo",
+      "price": {
+        "cost": 3000,
+        "current": 4820,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 47,
+        "min": 5,
+        "max": 148
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 30,
+        "favorite": false,
+        "views": 260,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "SNA-0095",
+      "barcode": "7801000000095",
+      "brand": "Nestlé",
+      "description": "Oreo marca Nestlé.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 96,
+      "category": "Snacks y Dulces",
+      "name": "Tritón",
+      "price": {
+        "cost": 600,
+        "current": 760,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 27,
+        "min": 12,
+        "max": 88
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 18,
+        "favorite": false,
+        "views": 525,
+        "rating": 4.8
+      },
+      "listImage": [],
+      "sku": "SNA-0096",
+      "barcode": "7801000000096",
+      "brand": "Evercrisp",
+      "description": "Tritón marca Evercrisp.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 97,
+      "category": "Snacks y Dulces",
+      "name": "Galletas Costa",
+      "price": {
+        "cost": 2100,
+        "current": 2560,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 49,
+        "min": 15,
+        "max": 147
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 23,
+        "favorite": false,
+        "views": 495,
+        "rating": 3.9
+      },
+      "listImage": [],
+      "sku": "SNA-0097",
+      "barcode": "7801000000097",
+      "brand": "Evercrisp",
+      "description": "Galletas Costa marca Evercrisp.",
+      "tax": 19,
+      "supplier": "Distribuidora Central",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 98,
+      "category": "Snacks y Dulces",
+      "name": "Maní salado",
+      "price": {
+        "cost": 2500,
+        "current": 3650,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 19,
+        "min": 9,
+        "max": 110
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 12,
+        "favorite": false,
+        "views": 220,
+        "rating": 3.8
+      },
+      "listImage": [],
+      "sku": "SNA-0098",
+      "barcode": "7801000000098",
+      "brand": "Evercrisp",
+      "description": "Maní salado marca Evercrisp.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 99,
+      "category": "Snacks y Dulces",
+      "name": "Cabritas",
+      "price": {
+        "cost": 4100,
+        "current": 4570,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 60,
+        "min": 12,
+        "max": 143
+      },
+      "offer": {
+        "active": true,
+        "oldPrice": 5380,
+        "newPrice": 4570,
+        "endDate": "2026-12-31"
+      },
+      "assessment": {
+        "purchases": 0,
+        "favorite": false,
+        "views": 88,
+        "rating": 4.2
+      },
+      "listImage": [],
+      "sku": "SNA-0099",
+      "barcode": "7801000000099",
+      "brand": "Nestlé",
+      "description": "Cabritas marca Nestlé.",
+      "tax": 19,
+      "supplier": "Proveedor Local",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    },
+    {
+      "id": 100,
+      "category": "Snacks y Dulces",
+      "name": "Gomitas",
+      "price": {
+        "cost": 3800,
+        "current": 6670,
+        "unit": "unidad"
+      },
+      "stock": {
+        "quantity": 97,
+        "min": 9,
+        "max": 85
+      },
+      "offer": {
+        "active": false,
+        "oldPrice": null,
+        "newPrice": null,
+        "endDate": null
+      },
+      "assessment": {
+        "purchases": 30,
+        "favorite": false,
+        "views": 213,
+        "rating": 3.6
+      },
+      "listImage": [],
+      "sku": "SNA-0100",
+      "barcode": "7801000000100",
+      "brand": "Nestlé",
+      "description": "Gomitas marca Nestlé.",
+      "tax": 19,
+      "supplier": "Mayorista 10",
+      "enabled": true,
+      "createdAt": "2026-07-18",
+      "updatedAt": "2026-07-18"
+    }
+  ]
+}
