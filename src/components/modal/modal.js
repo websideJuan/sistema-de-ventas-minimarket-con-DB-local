@@ -27,7 +27,7 @@ export const Modal = function ({ context, title, actions }) {
           `
           <div class="flex gap-3">
             <button class="bg-indigo-600 text-white py-2 w-full rounded-lg cursor-pointer hover:bg-indigo-800" data-id="save">Guardar</button>
-            <button class="bg-gray-200 py-2 w-full rounded-lg cursor-pointer hover:bg-gray-300 ">Cancelar</button>
+            <button class="bg-gray-200 py-2 w-full rounded-lg cursor-pointer hover:bg-gray-300" data-id="cancel">Cancelar</button>
           </div>
           `
         : ''

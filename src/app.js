@@ -99,16 +99,31 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
           .querySelectorAll('input[name="methodPay"]')
           .forEach((radio) => {
             let answer;
+            let dailySalesReport = {}
+
             if (radio.checked === true) {
               if (radio.dataset.id === "cash") {
                 answer = prompt("Ingresa el monto pagado.");
+                dailySalesReport.amountPaid = answer
               } else {
                 answer = prompt("Opere su tarjeta.");
+                dailySalesReport.codeOperation = answer
               }
 
               localStorage.setItem("cart", JSON.stringify([]));
-              cart = []
+              cart = [];
               renderCartItem();
+
+              dailySalesReport.methodPay = radio.dataset.id
+              dailySalesReport.totalPrice = totalPrice
+              
+
+
+              const dataDailySale = JSON.parse(localStorage.getItem('dataDailySale')) || []
+
+              dataDailySale.push(dailySalesReport)
+
+              localStorage.setItem('dataDailySale', JSON.stringify(dataDailySale))
 
               const confirm = Modal({
                 context: "Gracias por su compra!",
@@ -193,6 +208,163 @@ document.querySelector("#addToProduct").addEventListener("click", () => {
         });
     },
   });
+  document.body.appendChild(modal);
+});
+
+document.querySelector("#invoices").addEventListener("click", () => {
+  const modal = Modal({
+    context: `
+      <h6>
+        Ingresa el numero de la factura
+      </h6>
+      <div>
+        <input type="text" class="w-full" data-id="invoiceId" /> 
+      </div>
+    `,
+    title: "Facturas",
+    actions: () => {
+      const invoices = JSON.parse(localStorage.getItem("invoices"));
+      if (!invoices) {
+        return alert("invoices empty");
+      }
+
+      const invoiceId = document.querySelector('input[data-id="invoiceId"]');
+
+      console.log(`Id ingresado desde el input: ${invoiceId.value}`);
+
+      const invoceFounded = invoices.filter(
+        (invoice) => invoice.id === invoiceId.value,
+      );
+
+      if (invoceFounded.length === 0) {
+        const notFoundedInvoice = Modal({
+          context: "Factura no encontrada",
+          title: "Facturas.",
+        });
+        document.body.appendChild(notFoundedInvoice);
+        setTimeout(() => {
+          notFoundedInvoice.remove();
+        }, 1000);
+        return;
+      }
+
+      console.log(`Resultado de la busqueda: ${invoceFounded}`);
+      const invoceModal = Modal({
+        context: invoceFounded.map((invoce) => `${invoce.name}`),
+        title: "Factura",
+      });
+
+      document.body.appendChild(invoceModal);
+    },
+  });
+
+  document.body.appendChild(modal);
+});
+
+document.querySelector("#dailySales").addEventListener("click", () => {
+  const modal = Modal({
+    context: `
+      <div>
+        <p>
+          Finaliza las ventas del día y registra el cierre
+        </p>
+      </div>
+    `,
+    title: "Cierre de Caja",
+    actions: () => {
+      if (localStorage.getItem('dataDailySale') === '[]') {
+        return alert('No se a iniciado el dia.')
+      }
+      const validateTheDailyCashClosing = Modal({
+        context: `
+          <div>
+            <p>
+              Estás a punto de cerrar la caja y finalizar todas las ventas del día. Esta acción no se puede deshacer.
+            </>
+            <div>
+              <label>
+                Escribe CERRAR para confirmar
+              </label>
+              <input type="text" class="py-6 px-4 w-full" data-id="validKeyToClosing" data-key="CERRAR" />
+            </div>
+          </div>
+        `,
+        title: "Finalizar Ventas del Día",
+        actions: (e) => {
+          const inputValidKeyToClosing = document.querySelector(
+            'input[data-id="validKeyToClosing"]',
+          );
+
+          if (
+            inputValidKeyToClosing.value !== inputValidKeyToClosing.dataset.key
+          )
+            return;
+
+          const salesOfDay = JSON.parse(localStorage.getItem("dataDailySale"));
+          const hoy = new Date();
+          const formatoFecha = new Intl.DateTimeFormat("es-CL", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }).format(hoy);
+
+          const succesClosing = Modal({
+            context: `
+              <div class="w-xl">
+                <div class="flex justify-between">
+                  <p class="text-gray-400">
+                    Fecha
+                  </p>
+                  <p class="font-bold">
+                    ${formatoFecha}
+                  </p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-gray-400">
+                    Ventas en Efectivo
+                  </p>
+                  <p class="font-bold">
+                    ${(salesOfDay.reduce((acc, current) => acc + current.totalPrice ,0)).toLocaleString()}
+                  </p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-gray-400">
+                    Fondo Inicial
+                  </p>
+                  <p class="font-bold">
+                    50000
+                  </p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-gray-400">
+                    Efectivo en Caja
+                  </p>
+                  <p class="font-bold">
+                    ${(salesOfDay.reduce((acc, current) => acc + current.totalPrice ,0) + 50000).toLocaleString()}
+                  </p>
+                </div>
+              <div>
+            `,
+            title: "Resumen del Cierre",
+            actions: () => {
+              console.log("save data day");
+              localStorage.setItem('dataDailySale', JSON.stringify([]))
+              succesClosing.remove();
+            },
+          });
+
+          document.body.appendChild(succesClosing);
+          setTimeout(() => {
+            validateTheDailyCashClosing.remove();
+            modal.remove();
+          }, 1000);
+        },
+      });
+
+      document.body.appendChild(validateTheDailyCashClosing);
+    },
+  });
+
   document.body.appendChild(modal);
 });
 
