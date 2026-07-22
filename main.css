@@ -3,11 +3,11 @@ body {
 }
 
 #renderProductsList {
-  height: calc(100vh - 250px);
+  height: calc(100vh - 450px);
   overflow-y: auto;
 }
 
 #listCartProducts {
-  height: calc(100vh - 250px);
+  height: calc(100vh - 300px);
   overflow-y: auto;
 }

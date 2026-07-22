@@ -64,6 +64,105 @@ const renderCartItem = () => {
   });
 };
 
+const startTheSalesDay = () => {
+  const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
+
+  if (!dataDailySale) {
+    const notDataDaily = Modal({
+      context: `No has iniciado las ventas!`,
+      title: "Accion requerida",
+    });
+
+    document.body.appendChild(notDataDaily);
+    return;
+  }
+
+  const modal = Modal({
+    context: "Para iniciar el dia ingrese el efectivo en caja.",
+    title: "Inicia el dia de ventas.",
+    actions: () => {
+      const createDataDailySale = Modal({
+        context: `
+                 <div>
+                   <div class="mb-6">
+                     <label for="cashOnHand" class="mb-3 text-gray-600 block">
+                       Efectivo en caja
+                     </label>
+                     <input class="w-full py-4 ps-4 border border-gray-400 rounded-xl" type="text" name="cashOnHand" data-id="cashOnHand" placeholder="10.000, 15.000, 20.000" required />
+                   </div>
+                   <div class="mb-6">
+                     <label for="sellerName" class="mb-3 text-gray-600 block">
+                       Nombre del vendedor
+                     </label>
+                     <input class="w-full py-4 ps-4 border border-gray-400 rounded-xl" type="text" name="sellerName" data-id="sellerName" placeholder="Nombre del vendedor" required />
+                   </div>
+                 </div>
+               `,
+        title: "Inicia el dia de ventas.",
+        actions: () => {
+          const cashOnHand = document.querySelector(
+            'input[data-id="cashOnHand"]',
+          );
+          const sellerName = document.querySelector(
+            'input[data-id="sellerName"]',
+          );
+
+          const dataDailySale = JSON.parse(
+            localStorage.getItem("dataDailySale"),
+          );
+          dataDailySale.cashOnHand = cashOnHand.value;
+          dataDailySale.seller = sellerName.value;
+
+          localStorage.setItem("dataDailySale", JSON.stringify(dataDailySale));
+
+          const successCreateDataDailySale = Modal({
+            context: "Has iniciado el dia de forma correcta!",
+            title: "Inicia dia de ventas.",
+          });
+
+          setTimeout(() => {
+            createDataDailySale.remove();
+            successCreateDataDailySale.remove();
+            modal.remove();
+          }, 1000);
+        },
+      });
+
+      document.body.appendChild(createDataDailySale);
+    },
+  });
+
+  document.body.appendChild(modal);
+};
+
+document.querySelector("#initDailySale").addEventListener("click", () => {
+  const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
+  console.log(!dataDailySale);
+
+  if (!dataDailySale) {
+    localStorage.setItem(
+      "dataDailySale",
+      JSON.stringify({
+        cashOnHand: 0,
+        seller: "",
+        salesOfDay: [],
+      }),
+    );
+  }
+
+  if (dataDailySale && dataDailySale.cashOnHand !== 0) {
+    const modal = Modal({
+      context: `Ya iniciaste el dia de ventas.`,
+      title: "Ventas",
+    });
+
+    document.body.appendChild(modal);
+    return;
+  }
+
+  startTheSalesDay();
+});
+
 document.querySelector("#cartFooter").addEventListener("click", (e) => {
   if (e.target.dataset.modal === "addToMethodOfPay") {
     const totalPrice = cart.reduce((acc, current) => acc + current.price, 0);
@@ -99,31 +198,33 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
           .querySelectorAll('input[name="methodPay"]')
           .forEach((radio) => {
             let answer;
-            let dailySalesReport = {}
+            let dailySalesReport = {};
 
             if (radio.checked === true) {
               if (radio.dataset.id === "cash") {
                 answer = prompt("Ingresa el monto pagado.");
-                dailySalesReport.amountPaid = answer
+                dailySalesReport.amountPaid = answer;
               } else {
                 answer = prompt("Opere su tarjeta.");
-                dailySalesReport.codeOperation = answer
+                dailySalesReport.codeOperation = answer;
               }
 
               localStorage.setItem("cart", JSON.stringify([]));
               cart = [];
               renderCartItem();
 
-              dailySalesReport.methodPay = radio.dataset.id
-              dailySalesReport.totalPrice = totalPrice
-              
+              dailySalesReport.methodPay = radio.dataset.id;
+              dailySalesReport.totalPrice = totalPrice;
 
+              const dataDailySale =
+                JSON.parse(localStorage.getItem("dataDailySale")) || [];
 
-              const dataDailySale = JSON.parse(localStorage.getItem('dataDailySale')) || []
+              dataDailySale.salesOfDay.push(dailySalesReport);
 
-              dataDailySale.push(dailySalesReport)
-
-              localStorage.setItem('dataDailySale', JSON.stringify(dataDailySale))
+              localStorage.setItem(
+                "dataDailySale",
+                JSON.stringify(dataDailySale),
+              );
 
               const confirm = Modal({
                 context: "Gracias por su compra!",
@@ -134,7 +235,7 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
               setTimeout(() => {
                 modal.remove();
                 confirm.remove();
-              }, 1000);
+              }, 5000);
             }
           });
       },
@@ -262,6 +363,11 @@ document.querySelector("#invoices").addEventListener("click", () => {
 });
 
 document.querySelector("#dailySales").addEventListener("click", () => {
+  if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
+    startTheSalesDay();
+    return;
+  }
+
   const modal = Modal({
     context: `
       <div>
@@ -272,20 +378,20 @@ document.querySelector("#dailySales").addEventListener("click", () => {
     `,
     title: "Cierre de Caja",
     actions: () => {
-      if (localStorage.getItem('dataDailySale') === '[]') {
-        return alert('No se a iniciado el dia.')
+      if (localStorage.getItem("dataDailySale") === "[]") {
+        return alert("No se a iniciado el dia.");
       }
       const validateTheDailyCashClosing = Modal({
         context: `
           <div>
-            <p>
-              Estás a punto de cerrar la caja y finalizar todas las ventas del día. Esta acción no se puede deshacer.
-            </>
-            <div>
+            <p class="mb-8">
+              Estás a punto de cerrar la caja y finalizar todas las ventas del día.<br /> Esta acción no se puede deshacer.
+            </p>
+            <div class="flex flex-col gap-3">
               <label>
                 Escribe CERRAR para confirmar
               </label>
-              <input type="text" class="py-6 px-4 w-full" data-id="validKeyToClosing" data-key="CERRAR" />
+              <input type="text" class="py-6 px-4 w-full border border-gray-400 rounded-xl placeholder:text-red-600" data-id="validKeyToClosing" data-key="CERRAR" placeholder="CERRAR" />
             </div>
           </div>
         `,
@@ -300,7 +406,14 @@ document.querySelector("#dailySales").addEventListener("click", () => {
           )
             return;
 
-          const salesOfDay = JSON.parse(localStorage.getItem("dataDailySale"));
+          const dataDailySale = JSON.parse(
+            localStorage.getItem("dataDailySale"),
+          );
+
+          const cashSalesOfDay = dataDailySale.salesOfDay
+            .filter((saleDay) => saleDay.methodPay === "cash")
+            .reduce((acc, current) => acc + current.totalPrice, 0);
+            
           const hoy = new Date();
           const formatoFecha = new Intl.DateTimeFormat("es-CL", {
             day: "2-digit",
@@ -310,7 +423,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
 
           const succesClosing = Modal({
             context: `
-              <div class="w-xl">
+              <div class="w-lg flex flex-col gap-6">
                 <div class="flex justify-between">
                   <p class="text-gray-400">
                     Fecha
@@ -324,7 +437,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
                     Ventas en Efectivo
                   </p>
                   <p class="font-bold">
-                    ${(salesOfDay.reduce((acc, current) => acc + current.totalPrice ,0)).toLocaleString()}
+                    ${cashSalesOfDay.toLocaleString()}
                   </p>
                 </div>
                 <div class="flex justify-between">
@@ -332,7 +445,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
                     Fondo Inicial
                   </p>
                   <p class="font-bold">
-                    50000
+                    ${Number(dataDailySale.cashOnHand).toLocaleString()}
                   </p>
                 </div>
                 <div class="flex justify-between">
@@ -340,7 +453,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
                     Efectivo en Caja
                   </p>
                   <p class="font-bold">
-                    ${(salesOfDay.reduce((acc, current) => acc + current.totalPrice ,0) + 50000).toLocaleString()}
+                    ${(cashSalesOfDay + Number(dataDailySale.cashOnHand)).toLocaleString()}
                   </p>
                 </div>
               <div>
@@ -348,7 +461,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
             title: "Resumen del Cierre",
             actions: () => {
               console.log("save data day");
-              localStorage.setItem('dataDailySale', JSON.stringify([]))
+              localStorage.setItem("dataDailySale", JSON.stringify([]));
               succesClosing.remove();
             },
           });
@@ -369,6 +482,10 @@ document.querySelector("#dailySales").addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
+    startTheSalesDay();
+  }
+
   renderCartItem();
 });
 
@@ -418,6 +535,10 @@ document
       .querySelectorAll("button.cursor-pointer.rounded-lg")
       .forEach((button) => {
         button.addEventListener("click", (e) => {
+          if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
+            startTheSalesDay();
+            return;
+          }
           const target = e.target.closest("div[data-id='cardProduct']");
 
           let product = {};
