@@ -110,6 +110,7 @@ const startTheSalesDay = () => {
           const dataDailySale = JSON.parse(
             localStorage.getItem("dataDailySale"),
           );
+
           dataDailySale.cashOnHand = cashOnHand.value;
           dataDailySale.seller = sellerName.value;
 
@@ -120,25 +121,25 @@ const startTheSalesDay = () => {
             title: "Inicia dia de ventas.",
           });
 
+          document.body.appendChild(successCreateDataDailySale);
+
           setTimeout(() => {
             createDataDailySale.remove();
             successCreateDataDailySale.remove();
-            modal.remove();
-          }, 1000);
+          }, 5000);
         },
       });
 
       document.body.appendChild(createDataDailySale);
+      modal.remove();
     },
   });
 
   document.body.appendChild(modal);
 };
 
-document.querySelector("#initDailySale").addEventListener("click", () => {
+document.querySelector("#initDailySale").addEventListener("click", (e) => {
   const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
-  console.log(!dataDailySale);
-
   if (!dataDailySale) {
     localStorage.setItem(
       "dataDailySale",
@@ -148,12 +149,15 @@ document.querySelector("#initDailySale").addEventListener("click", () => {
         salesOfDay: [],
       }),
     );
+
+    e.target.querySelector('div[data-id="badgeNotification"]').remove();
   }
 
-  if (dataDailySale && dataDailySale.cashOnHand !== 0) {
+  if (dataDailySale && Number(dataDailySale.cashOnHand) > 0) {
     const modal = Modal({
       context: `Ya iniciaste el dia de ventas.`,
       title: "Ventas",
+      actions: null,
     });
 
     document.body.appendChild(modal);
@@ -413,7 +417,16 @@ document.querySelector("#dailySales").addEventListener("click", () => {
           const cashSalesOfDay = dataDailySale.salesOfDay
             .filter((saleDay) => saleDay.methodPay === "cash")
             .reduce((acc, current) => acc + current.totalPrice, 0);
-            
+
+          const cardSalesOfDay = dataDailySale.salesOfDay
+            .filter((saleDay) => saleDay.methodPay === "byCard")
+            .reduce((acc, current) => acc + current.totalPrice, 0);
+
+          const totalSalesOfDay = dataDailySale.salesOfDay.reduce(
+            (acc, current) => acc + current.totalPrice,
+            0,
+          );
+
           const hoy = new Date();
           const formatoFecha = new Intl.DateTimeFormat("es-CL", {
             day: "2-digit",
@@ -456,13 +469,33 @@ document.querySelector("#dailySales").addEventListener("click", () => {
                     ${(cashSalesOfDay + Number(dataDailySale.cashOnHand)).toLocaleString()}
                   </p>
                 </div>
+                <div class="flex justify-between">
+                  <p class="text-gray-400">
+                    Total tarjeta (Debito y Credito)
+                  </p>
+                  <p class="font-bold">
+                    ${cardSalesOfDay.toLocaleString()}
+                  </p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-gray-400">
+                    TOTAL VENDIDO
+                  </p>
+                  <p class="font-bold">
+                    ${totalSalesOfDay.toLocaleString()}
+                  </p>
+                </div>
               <div>
             `,
             title: "Resumen del Cierre",
             actions: () => {
-              console.log("save data day");
-              localStorage.setItem("dataDailySale", JSON.stringify([]));
-              succesClosing.remove();
+              const dataDailySale = JSON.parse(localStorage.getItem('dataDailySale'))
+              const reportSalesMonth = JSON.parse(localStorage.getItem('reportSalesMonth'))
+
+              reportSalesMonth.push(dataDailySale)
+
+              localStorage.setItem('reportSalesMonth', JSON.stringify(reportSalesMonth))
+              localStorage.removeItem("dataDailySale");
             },
           });
 
@@ -483,6 +516,21 @@ document.querySelector("#dailySales").addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
+    const badgeNotification = document.createElement("div");
+
+    badgeNotification.setAttribute("data-id", "badgeNotification");
+    badgeNotification.classList.add(
+      "absolute",
+      "-top-2",
+      "-right-2",
+      "bg-white",
+      "rounded-xl",
+      "text-red-900",
+    );
+    badgeNotification.innerHTML = `<i class="fa-solid fa-exclamation"></i>`;
+
+    document.querySelector("#initDailySale").appendChild(badgeNotification);
+
     startTheSalesDay();
   }
 

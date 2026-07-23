@@ -13,7 +13,7 @@ export const Modal = function ({ context, title, actions }) {
 
   modal.innerHTML = `
     <div class="bg-white shadow p-6 rounded-xl">
-      <div class="flex justify-between items-center mb-6">
+      <div class="flex justify-between items-center mb-6 gap-6">
         <h3 class="font-semibold text-xl">
           ${title}
         </h3>  
