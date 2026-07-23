@@ -40,25 +40,29 @@ const renderCartItem = () => {
       (acc, current) => acc + current.price,
       0,
     );
-
     document.querySelector("#cartFooter").innerHTML = `
       <div class="flex items-center justify-between">
         <div>
           <p><b>Cantidad</b></p> <span>${cart.length}</span>
         </div>
+
         <div>
           <p><b>Precio Neto:</b></p> ${Math.round(totalPriceCart).toLocaleString()}
         </div>
+
         <div>
           <p><b>+IVA:</b></p> ${Math.round(totalPriceCart * 0.19).toLocaleString()}
         </div>
+
         <div>
           <p><b>Total:</b></p> ${Math.round(totalPriceCart * 1.19).toLocaleString()}
         </div>
+
         <div>
           <button data-modal="addToMethodOfPay" class="bg-indigo-600 text-white py-2 px-4 cursor-pointer rounded shadow hover:bg-indigo-800">
             Agregar medio de pago
           </button>
+        </div>
       </div>
     `;
   });
@@ -215,6 +219,8 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
 
               localStorage.setItem("cart", JSON.stringify([]));
               cart = [];
+              console.log(cart);
+              
               renderCartItem();
 
               dailySalesReport.methodPay = radio.dataset.id;
@@ -236,6 +242,7 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
               });
 
               document.body.appendChild(confirm);
+
               setTimeout(() => {
                 modal.remove();
                 confirm.remove();
@@ -490,12 +497,19 @@ document.querySelector("#dailySales").addEventListener("click", () => {
             title: "Resumen del Cierre",
             actions: () => {
               const dataDailySale = JSON.parse(localStorage.getItem('dataDailySale'))
-              const reportSalesMonth = JSON.parse(localStorage.getItem('reportSalesMonth'))
+              const reportSalesMonth = JSON.parse(localStorage.getItem('reportSalesMonth')) || []
 
               reportSalesMonth.push(dataDailySale)
 
               localStorage.setItem('reportSalesMonth', JSON.stringify(reportSalesMonth))
               localStorage.removeItem("dataDailySale");
+
+              const successCreateReportDataDaily = Modal({
+                context: `Reporte generado exitosamente.`,
+                title: 'Generar reporte.'
+              })
+
+              document.body.appendChild(successCreateReportDataDaily)
             },
           });
 
