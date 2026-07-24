@@ -17,49 +17,43 @@ const renderCartItem = () => {
 
   cart.map((item) => {
     const li = document.createElement("li");
+    li.setAttribute("data-id", "cartItem");
+    li.classList.add("relative");
 
-    if (cart.length < 0) {
-      li.innerHTML =
-        "<div>Agrega los productos de tus clientes al carrito.</div>";
-    } else {
-      li.innerHTML = `
-          <div class="flex gap-4 items-center bg-white shadow-xs rounded-xl">
-            <img src="${item.img}" alt="${item.name}" class="w-20 h-20 object-cover"/>
-            <div>
-              <p class="text-gray-800 text-lg">${item.name}</p>
-              <p class="text-gray-600/80 text-xs">${item.count} X ${item.unit.toUpperCase()}</p>
-              <p class="font-mono text-xl">$${item.price.toLocaleString()}</p>
-            </div>
-          </div>
-        `;
-    }
+    li.innerHTML = `
+      <div class="flex gap-4 items-center bg-white shadow-xs rounded-xl" data-id="">
+        <img src="public/image-card-background.jpg" alt="${item.name}" class="w-20 h-20 object-cover"/>
+        <div>
+          <p class="text-gray-800 text-lg">${item.name}</p>
+          <p class="text-gray-600/80 text-xs">${item.count} X ${item.price.unit.toUpperCase()}</p>
+          <p class="font-mono text-xl">$${item.price.current.toLocaleString()}</p>
+        </div>
+      </div>
+    `;
 
     listCartProducts.appendChild(li);
 
     const totalPriceCart = cart.reduce(
-      (acc, current) => acc + current.price,
+      (acc, current) => acc + current.price.current,
       0,
     );
     document.querySelector("#cartFooter").innerHTML = `
-      <div class="flex items-center justify-between">
-        <div>
-          <p><b>Cantidad</b></p> <span>${cart.length}</span>
-        </div>
-
-        <div>
+      <div class="flex flex-col gap-4">
+        
+        <div class="flex justify-between items-center">
           <p><b>Precio Neto:</b></p> ${Math.round(totalPriceCart).toLocaleString()}
         </div>
 
-        <div>
+        <div class="flex justify-between items-center">
           <p><b>+IVA:</b></p> ${Math.round(totalPriceCart * 0.19).toLocaleString()}
         </div>
 
-        <div>
+        <div class="flex justify-between items-center">
           <p><b>Total:</b></p> ${Math.round(totalPriceCart * 1.19).toLocaleString()}
         </div>
 
         <div>
-          <button data-modal="addToMethodOfPay" class="bg-indigo-600 text-white py-2 px-4 cursor-pointer rounded shadow hover:bg-indigo-800">
+          <button data-modal="addToMethodOfPay" class="w-full bg-indigo-600 text-white py-2 px-4 cursor-pointer rounded shadow hover:bg-indigo-800">
             Agregar medio de pago
           </button>
         </div>
@@ -173,11 +167,12 @@ document.querySelector("#initDailySale").addEventListener("click", (e) => {
 
 document.querySelector("#cartFooter").addEventListener("click", (e) => {
   if (e.target.dataset.modal === "addToMethodOfPay") {
-    const totalPrice = cart.reduce((acc, current) => acc + current.price, 0);
+    const totalPrice =
+      cart.reduce((acc, current) => acc + current.price.current, 0) * 1.19;
 
     const modal = Modal({
       context: `
-        <p class="mb-6">Total a pagar: $${totalPrice}</p>
+        <p class="mb-6">Total a pagar: $${Math.round(totalPrice).toLocaleString()}</p>
         <div class="flex gap-4" data-id="selectMethod">
           <div class="basis-1/2 relative">
             <input type="radio" class=" opacity-0 peer absolute inset-0" name="methodPay" data-id="cash">
@@ -217,10 +212,9 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                 dailySalesReport.codeOperation = answer;
               }
 
-              localStorage.setItem("cart", JSON.stringify([]));
               cart = [];
-              console.log(cart);
-              
+              localStorage.setItem("cart", JSON.stringify(cart));
+
               renderCartItem();
 
               dailySalesReport.methodPay = radio.dataset.id;
@@ -326,23 +320,36 @@ document.querySelector("#addToProduct").addEventListener("click", () => {
 document.querySelector("#invoices").addEventListener("click", () => {
   const modal = Modal({
     context: `
-      <h6>
+      <h6 class="block mb-3">
         Ingresa el numero de la factura
       </h6>
       <div>
-        <input type="text" class="w-full" data-id="invoiceId" /> 
+        <label for="invoiceId">
+          N° de factura.
+        </label>
+        <input 
+          type="text" 
+          class="w-full border border-gray-400 py-3 ps-3 rounded-xl"
+          name="invoiceId"
+          data-id="invoiceId" 
+          placeholder="1893729"  
+        /> 
       </div>
     `,
     title: "Facturas",
     actions: () => {
-      const invoices = JSON.parse(localStorage.getItem("invoices"));
-      if (!invoices) {
-        return alert("invoices empty");
-      }
-
       const invoiceId = document.querySelector('input[data-id="invoiceId"]');
 
-      console.log(`Id ingresado desde el input: ${invoiceId.value}`);
+      if (invoiceId.value === "" && invoiceId.value.length === 0) {
+        const inputError = Modal({
+          context: `El campo numero de factura no puede estar vacio!`,
+          title: "ERROR!",
+        });
+        document.body.appendChild(inputError);
+        return;
+      }
+
+      const invoices = JSON.parse(localStorage.getItem("invoices"));
 
       const invoceFounded = invoices.filter(
         (invoice) => invoice.id === invoiceId.value,
@@ -360,7 +367,6 @@ document.querySelector("#invoices").addEventListener("click", () => {
         return;
       }
 
-      console.log(`Resultado de la busqueda: ${invoceFounded}`);
       const invoceModal = Modal({
         context: invoceFounded.map((invoce) => `${invoce.name}`),
         title: "Factura",
@@ -496,20 +502,26 @@ document.querySelector("#dailySales").addEventListener("click", () => {
             `,
             title: "Resumen del Cierre",
             actions: () => {
-              const dataDailySale = JSON.parse(localStorage.getItem('dataDailySale'))
-              const reportSalesMonth = JSON.parse(localStorage.getItem('reportSalesMonth')) || []
+              const dataDailySale = JSON.parse(
+                localStorage.getItem("dataDailySale"),
+              );
+              const reportSalesMonth =
+                JSON.parse(localStorage.getItem("reportSalesMonth")) || [];
 
-              reportSalesMonth.push(dataDailySale)
+              reportSalesMonth.push(dataDailySale);
 
-              localStorage.setItem('reportSalesMonth', JSON.stringify(reportSalesMonth))
+              localStorage.setItem(
+                "reportSalesMonth",
+                JSON.stringify(reportSalesMonth),
+              );
               localStorage.removeItem("dataDailySale");
 
               const successCreateReportDataDaily = Modal({
                 context: `Reporte generado exitosamente.`,
-                title: 'Generar reporte.'
-              })
+                title: "Generar reporte.",
+              });
 
-              document.body.appendChild(successCreateReportDataDaily)
+              document.body.appendChild(successCreateReportDataDaily);
             },
           });
 
@@ -527,6 +539,44 @@ document.querySelector("#dailySales").addEventListener("click", () => {
 
   document.body.appendChild(modal);
 });
+
+
+// Funcionalidad en estado de prueba.
+document
+  .querySelector('button[data-id="deleteElemets"]')
+  .addEventListener("click", () => {
+    const deleteElemets = document.querySelector(
+      'input[data-id="deleteElemets"]',
+    );
+    const isHidden = deleteElemets.classList.toggle("hidden");
+    const liElementsItems = document.querySelectorAll('li[data-id="cartItem"]')
+
+    liElementsItems.forEach((liItem) => {
+      
+      const div = document.createElement("div");
+      div.id = "removeElements";
+
+      if (!isHidden) {
+        div.innerHTML = `
+          <input 
+            type="checkbox" 
+            data-id="deleteItem" 
+            class="absolute right-0 top-1/2 -translate-1/2" />
+        `;
+        liItem.appendChild(div);
+      } else {
+        liItem.querySelector("#removeElements").remove();
+      }
+
+      liElementsItems.forEach(liItemCheck => {
+        if (liItemCheck.querySelector('input[data-id="deleteItem"]').checked === false) {
+          return
+        }
+
+        deleteElemets.checked = true
+      })
+    });
+  });
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
@@ -556,9 +606,15 @@ document
   .addEventListener("input", async (e) => {
     const { products } = await fetchDatabase();
 
-    const filterProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(e.target.value.toLowerCase().trim()),
-    );
+    const filterProducts = products
+      .filter((product) =>
+        product.name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase().trim()),
+      )
+      .sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
 
     const ullistItem = document.querySelector("#renderProductsList");
     ullistItem.innerHTML = "";
@@ -584,7 +640,10 @@ document
             <span id="unit">
               ${product.price.unit}
             </span>
-            <button class="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-800 transition-colors">
+            <button 
+              class="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-800 transition-colors"
+              data-idProduct="${product.id}"
+            >
               Buy Now
             </button>
           </div>
@@ -601,39 +660,66 @@ document
             startTheSalesDay();
             return;
           }
-          const target = e.target.closest("div[data-id='cardProduct']");
 
-          let product = {};
-          product.name = target.querySelector(
-            "h3.text-lg.text-gray-400",
-          ).textContent;
-          product.img = target
-            .querySelector("img.h-full.w-full")
-            .getAttribute("src");
-          product.price = target.querySelector(
-            "span.text-lg.font-extrabold.text-gray-900",
-          ).textContent;
-          product.unit = target.querySelector("span#unit").textContent.trim();
-
+          const idProduct = Number(e.target.dataset.idproduct);
+          const productFounded = products.find((item) => item.id === idProduct);
           let currentCount;
 
-          if (product.unit.toLowerCase() === "kg") {
+          if (productFounded.price.unit.toLowerCase() === "kg") {
             currentCount = parseFloat(prompt("¿Cuantos kilogramos?"));
-          } else if (product.unit.toLowerCase() === "unidad") {
+          } else if (productFounded.price.unit.toLowerCase() === "unidad") {
             currentCount = Number(prompt("¿Cuantas cantidades?"));
           }
 
-          const elementForCart = {};
+          cart.push({
+            ...productFounded,
+            count: currentCount,
+          });
 
-          elementForCart.name = product.name;
-          elementForCart.img = product.img;
-          elementForCart.count = currentCount;
-          elementForCart.price = Number(product.price) * currentCount;
-          elementForCart.unit = product.unit;
-
-          cart.push(elementForCart);
           localStorage.setItem("cart", JSON.stringify(cart));
           renderCartItem();
         });
       });
+
+    // .forEach((button) => {
+    //   button.addEventListener("click", (e) => {
+    //     if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
+    //       startTheSalesDay();
+    //       return;
+    //     }
+    //     const target = e.target.closest("div[data-id='cardProduct']");
+
+    //     let product = {};
+    //     product.name = target.querySelector(
+    //       "h3.text-lg.text-gray-400",
+    //     ).textContent;
+    //     product.img = target
+    //       .querySelector("img.h-full.w-full")
+    //       .getAttribute("src");
+    //     product.price = target.querySelector(
+    //       "span.text-lg.font-extrabold.text-gray-900",
+    //     ).textContent;
+    //     product.unit = target.querySelector("span#unit").textContent.trim();
+
+    //     let currentCount;
+
+    //     if (product.unit.toLowerCase() === "kg") {
+    //       currentCount = parseFloat(prompt("¿Cuantos kilogramos?"));
+    //     } else if (product.unit.toLowerCase() === "unidad") {
+    //       currentCount = Number(prompt("¿Cuantas cantidades?"));
+    //     }
+
+    //     const elementForCart = {};
+
+    //     elementForCart.name = product.name;
+    //     elementForCart.img = product.img;
+    //     elementForCart.count = currentCount;
+    //     elementForCart.price = Number(product.price) * currentCount;
+    //     elementForCart.unit = product.unit;
+
+    //     cart.push(elementForCart);
+    //     localStorage.setItem("cart", JSON.stringify(cart));
+    //     renderCartItem();
+    //   });
+    // });
   });

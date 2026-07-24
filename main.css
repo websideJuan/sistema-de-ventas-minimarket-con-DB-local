@@ -8,6 +8,6 @@ body {
 }
 
 #listCartProducts {
-  height: calc(100vh - 300px);
+  height: calc(100vh - 415px);
   overflow-y: auto;
 }

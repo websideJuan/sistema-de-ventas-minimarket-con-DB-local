@@ -1,4 +1,4 @@
-export const Modal = function ({ context, title, actions }) {
+export const Modal = function ({ context, title, actions, textButton = 'Guardar' }) {
   const modal = document.createElement("div");
 
   modal.classList.add(
@@ -17,36 +17,41 @@ export const Modal = function ({ context, title, actions }) {
         <h3 class="font-semibold text-xl">
           ${title}
         </h3>  
-        <i class="fa-solid fa-xmark" data-id="closeModale"></i>
+        <button data-id="closeModale"  class="cursor-pointer text-gray-400 hover:text-gray-900">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
       <div class="mb-6">
         ${context}
       </div>
-      ${ 
-        typeof actions === "function" ?
-          `
+      ${
+        typeof actions === "function"
+          ? `
           <div class="flex gap-3">
-            <button class="bg-indigo-600 text-white py-2 w-full rounded-lg cursor-pointer hover:bg-indigo-800" data-id="save">Guardar</button>
-            <button class="bg-gray-200 py-2 w-full rounded-lg cursor-pointer hover:bg-gray-300" data-id="cancel">Cancelar</button>
+            <button class="bg-indigo-600 text-white py-2 w-full rounded-lg cursor-pointer hover:bg-indigo-800" data-id="save">
+              ${textButton}
+            </button>
+            <button class="bg-gray-200 py-2 w-full rounded-lg cursor-pointer hover:bg-gray-300" data-id="cancel">
+              Cancelar
+            </button>
           </div>
           `
-        : ''
+          : ""
       }
     </div>
   `;
 
   modal.addEventListener("click", (e) => {
-    if (e.target.dataset.id === "closeModale") {
-      modal.remove();
-    }
-
     if (e.target.dataset.id === "save") {
       actions();
     } else if (e.target.dataset.id === "cancel") {
       modal.remove();
     }
-    
   });
+
+  modal
+    .querySelector('button[data-id="closeModale"]')
+    .addEventListener("click", () => modal.remove());
 
   return modal;
 };
