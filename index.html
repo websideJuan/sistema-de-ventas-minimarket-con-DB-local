@@ -111,16 +111,25 @@
         </h2>
 
         <div id="cartHead" class="flex justify-between mb-3">
-          <button data-id="deleteElemets" class="text-gray-700 cursor-pointer">
+          <button 
+              data-id="deleteElemets" 
+              class="text-gray-700 cursor-pointer">
             Eliminar elementos
           </button>
 
-          <input
-            type="checkbox"
-            name="deleteElemets"
-            data-id="deleteElemets"
-            class="hidden"
-          />
+          <div>
+            <button 
+              class="p-2 rounded-sm hover:bg-red-600 hover:text-white cursor-pointer transition-all" 
+              id="deleteElemetSelect">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+            <input
+              type="checkbox"
+              name="checkDeletAll"
+              id="checkDeletAll"
+              class="hidden"
+            />
+          </div>
         </div>
 
         <ul

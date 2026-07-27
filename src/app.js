@@ -18,15 +18,29 @@ const renderCartItem = () => {
   cart.map((item) => {
     const li = document.createElement("li");
     li.setAttribute("data-id", "cartItem");
+    li.setAttribute("data-idProduct", item.id);
     li.classList.add("relative");
 
     li.innerHTML = `
-      <div class="flex gap-4 items-center bg-white shadow-xs rounded-xl" data-id="">
+      <div class="flex gap-4 items-center bg-white shadow-xs rounded-xl">
         <img src="public/image-card-background.jpg" alt="${item.name}" class="w-20 h-20 object-cover"/>
         <div>
           <p class="text-gray-800 text-lg">${item.name}</p>
           <p class="text-gray-600/80 text-xs">${item.count} X ${item.price.unit.toUpperCase()}</p>
-          <p class="font-mono text-xl">$${item.price.current.toLocaleString()}</p>
+          ${
+            item.offer.active
+              ? `
+          <div class="flex items-center gap-3">
+            <p class="line-through text-gray-400">
+              $ ${item.offer.oldPrice.toLocaleString()}
+            </p>
+            /
+            <p class="font-mono text-xl text-gray-900">
+              $ ${item.offer.newPrice.toLocaleString()}
+            </p>
+          </div>`
+              : `<p class="font-mono text-xl">$${item.price.current.toLocaleString()}</p>`
+          }
         </div>
       </div>
     `;
@@ -498,7 +512,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
                     ${totalSalesOfDay.toLocaleString()}
                   </p>
                 </div>
-              <div>
+              </div>
             `,
             title: "Resumen del Cierre",
             actions: () => {
@@ -522,6 +536,10 @@ document.querySelector("#dailySales").addEventListener("click", () => {
               });
 
               document.body.appendChild(successCreateReportDataDaily);
+              setTimeout(()=> {
+                successCreateReportDataDaily.remove()
+                succesClosing.remove()
+              },1000)
             },
           });
 
@@ -540,43 +558,92 @@ document.querySelector("#dailySales").addEventListener("click", () => {
   document.body.appendChild(modal);
 });
 
-
 // Funcionalidad en estado de prueba.
+const deleteElemets = document.querySelector("#checkDeletAll");
+
+let count = 0;
+
+document.querySelector("#listCartProducts").addEventListener("click", (e) => {
+  if (e.target.tagName === "INPUT") {
+    count += 1;
+
+    if (count === cart.length) {
+      deleteElemets.checked = true;
+    }
+  }
+});
+
 document
   .querySelector('button[data-id="deleteElemets"]')
   .addEventListener("click", () => {
-    const deleteElemets = document.querySelector(
-      'input[data-id="deleteElemets"]',
-    );
-    const isHidden = deleteElemets.classList.toggle("hidden");
-    const liElementsItems = document.querySelectorAll('li[data-id="cartItem"]')
+    deleteElemets.classList.toggle("hidden");
+    const liElementsItems = document.querySelectorAll('li[data-id="cartItem"]');
 
     liElementsItems.forEach((liItem) => {
-      
       const div = document.createElement("div");
       div.id = "removeElements";
 
-      if (!isHidden) {
-        div.innerHTML = `
-          <input 
-            type="checkbox" 
-            data-id="deleteItem" 
-            class="absolute right-0 top-1/2 -translate-1/2" />
-        `;
-        liItem.appendChild(div);
-      } else {
+      if (deleteElemets.classList.contains("hidden")) {
         liItem.querySelector("#removeElements").remove();
+        deleteElemets.classList.add("hidden");
+        return;
       }
 
-      liElementsItems.forEach(liItemCheck => {
-        if (liItemCheck.querySelector('input[data-id="deleteItem"]').checked === false) {
-          return
-        }
-
-        deleteElemets.checked = true
-      })
+      div.innerHTML = `
+        <input 
+          type="checkbox" 
+          data-id="deleteItem" 
+          class="absolute right-0 top-1/2 -translate-1/2" 
+        />
+      `;
+      liItem.appendChild(div);
     });
   });
+
+document.querySelector("#deleteElemetSelect").addEventListener("click", () => {
+  if (cart.length === 0) return;
+  const deleteItem = document.querySelectorAll('input[data-id="deleteItem"]');
+
+  const confirm = Modal({
+    context: `Estas seguro de eliminar el producto`,
+    title: "Eliminar productos",
+    actions: () => {
+      deleteItem.forEach((inputDelete) => {
+        if (inputDelete.checked) {
+          const id = Number(
+            inputDelete.closest('li[data-id="cartItem"]').dataset.idproduct,
+          );
+
+          cart.forEach((itemCart) => {
+            cart.splice(
+              cart.findIndex((itemForDelete) => inputDelete.id === id),
+              1,
+            );
+          });
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+        }
+      });
+
+      deleteElemets.classList.add("hidden");
+      cart = JSON.parse(localStorage.getItem("cart"));
+
+      renderCartItem();
+      confirm.remove();
+    },
+    textButton: "Eliminar",
+  });
+
+  document.body.appendChild(confirm);
+});
+
+document.querySelector("#checkDeletAll").addEventListener("input", () => {
+  const deleteItem = document.querySelectorAll('input[data-id="deleteItem"]');
+
+  deleteItem.forEach((inputDelete) => {
+    inputDelete.checked = true;
+  });
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
@@ -670,10 +737,9 @@ document
           } else if (productFounded.price.unit.toLowerCase() === "unidad") {
             currentCount = Number(prompt("¿Cuantas cantidades?"));
           }
-
           cart.push({
             ...productFounded,
-            count: currentCount,
+            count: currentCount === 0 ? 1 : currentCount,
           });
 
           localStorage.setItem("cart", JSON.stringify(cart));

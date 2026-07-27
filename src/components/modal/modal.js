@@ -2,7 +2,7 @@ export const Modal = function ({ context, title, actions, textButton = 'Guardar'
   const modal = document.createElement("div");
 
   modal.classList.add(
-    "absolute",
+    "fixed",
     "inset-0",
     "flex",
     "justify-center",
