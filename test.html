@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+      integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      :root {
+        --ink: #102a43;
+        --navy: #06283d;
+        --mint: #d9f99d;
+        --aqua: #7ee8d8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        width: 100%;
+        font-family: "DM Sans", sans-serif;
+        color: var(--ink);
+        overflow-x: hidden;
+      }
+
+      .nav-link {
+        color: #456277;
+        font-size: 0.92rem;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--navy);
+      }
+
+      .title {
+        font-family: "Fraunces", serif;
+        letter-spacing: -0.055em;
+        line-height: 0.98;
+      }
+
+      .button-main,
+      .button-ghost {
+        min-height: 3.15rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border-radius: 0.9rem;
+        padding: 0.75rem 1.15rem;
+        font-weight: 700;
+        font-size: 0.93rem;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .button-main:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 13px 24px rgba(6, 40, 61, 0.17);
+      }
+
+      .button-ghost:hover {
+        transform: translateY(-2px);
+        background: rgba(6, 40, 61, 0.07);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-100/50 h-screen">
+    <header>
+      <nav>
+        <div class="container">
+          <div
+            class="flex justify-between items-center py-6 px-4 relative bg-cyan-900 text-white"
+          >
+            <div class="flex items-center gap-4">
+              <div class="rotate-45">
+                <i class="fa-solid fa-square fa-xl"></i>
+              </div>
+              <a href="#" class="font-bold text-2xl">Cuatro</a>
+            </div>
+            <button class="md:hidden" id="btnMenuToggle">
+              <i class="fa-solid fa-bars fa-2xl"></i>
+            </button>
+            <div class="absolute w-full left-0 top-full bg-cyan-800/50 hidden" id="menuToggle">
+              <ul class="flex flex-col gap-2">
+                <li class="px-4 py-4"><a href="#">1</a></li>
+                <li class="px-4 py-4"><a href="#">2</a></li>
+                <li class="px-4 py-4"><a href="#">3</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <div class="container">
+          <div
+            class="flex flex-col justify-center items-center  rounded-b-4xl"
+          >
+            <div class="flex flex-col gap-4 text-white items-center py-6 pt-10 bg-cyan-900 w-full">
+              <div class="text-6xl border border-2 p-5 py-6 rounded-full">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <p class="text-gray-300/80 text-2xl">
+                Bienvenido <span id="userSaveLocal"></span>
+              </p>
+            </div>
+
+            <div class="w-full">
+              <form id="loginUser">
+                <div class="bg-cyan-900 px-4 py-8 rounded-b-2xl">
+                  <div class="w-80 mx-auto mb-4">
+                    <label for="rutClient" class="text-white text-xl mb-3 block text-start">
+                      Ingrese su RUT
+                    </label>
+                    <input
+                      type="text"
+                      id="rutClient"
+                      name="rutClient"
+                      placeholder="12.345.678-k"
+                      class="w-full border border-white rounded-lg placeholder:text-white px-4 py-3"
+                    />
+                  </div>
+                  <div class="w-80 mx-auto">
+                    <label for="passHashClient" class="text-white text-xl mb-3 block text-start">
+                      Password
+                    </label>
+                    <input
+                      type="text"
+                      id="passHashClient"
+                      name="passHashClient"
+                      placeholder="*******"
+                      class="w-full border border-white rounded-lg placeholder:text-white px-4 py-3"
+                    />
+                  </div>
+                </div>
+                <div class="flex justify-center items-center">
+                  <button type="submit" class="w-80 mt-3 rounded-2xl bg-cyan-900 py-3 text-white text-xl" id="btnFormLogin">
+                    Ingresar
+                  </button>
+                </div>
+              </form>
+
+              <p class="text-center mt-3">
+                <a href="#">¿Olvidaste tu clave?</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
