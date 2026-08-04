@@ -1,48 +1,100 @@
 import { auth } from "./src/scripts/auth.js";
-import { Modal } from "./src/components/modal/modal.js"
+import { Modal } from "./src/components/modal/modal.js";
 
 document.addEventListener("DOMContentLoaded", () => new main());
 
 const main = class Main {
   constructor() {
-    this.btnMenuToggle = document.querySelector('#btnMenuToggle')
-    this.menuToggle = document.querySelector('#menuToggle')
-    this.userSaveLocal = document.querySelector('#userSaveLocal')
-    this.loginUser = document.querySelector('#loginUser')
-    this.rutClientInput = document.querySelector('#rutClient')
-    this.passHashClientInput = document.querySelector('#passHashClient')
-    this.btnFormLogin = document.querySelector('#btnFormLogin')
+    this.btnMenuToggle = document.querySelector("#btnMenuToggle");
+    this.menuToggle = document.querySelector("#menuToggle");
+    this.userSaveLocal = document.querySelector("#userSaveLocal");
+    this.loginUser = document.querySelector("#loginUser");
+    this.rutClientInput = document.querySelector("#rutClient");
+    this.passHashClientInput = document.querySelector("#passHashClient");
+    this.btnFormLogin = document.querySelector("#btnFormLogin");
     this.init();
   }
   init() {
-    if (auth.verifyLoginActive()) {
-      this.userSaveLocal.textContent = auth.user.username
-      this.rutClientInput.closest('.w-80.mx-auto.mb-4').classList.add('hidden')
+
+    if (auth.verifySessionActive()) {
+      window.location.href = "index.html";
       return
     }
 
-    this.loginUser.addEventListener('submit', (e) => {
-      e.preventDefault()
-      const valueRutClientInput = this.rutClientInput.value
-      const valuePassHashClientInput = this.passHashClientInput.value
-      
+    if (auth.verifyLoginActive()) {
+      this.userSaveLocal.textContent = auth.user.username;
+      this.rutClientInput.closest(".w-80.mx-auto").classList.add("hidden");
+    }
+
+    const resetForm = (form) => {
+      form.reset();
+    };
+
+    const verifyInputValue = ({ name, value }) => {
+      if (value.trim().length === 0 || value.trim() === "") {
+        this.rutClientInput.classList.add("outline-red-400", "text-red-400");
+        this.passHashClientInput.classList.add(
+          "outline-red-400",
+          "text-red-400",
+        );
+      } else {
+        this.rutClientInput.classList.remove("outline-red-400", "text-red-400");
+        this.passHashClientInput.classList.remove(
+          "outline-red-400",
+          "text-red-400",
+        );
+      }
+    };
+
+    [this.rutClientInput, this.passHashClientInput].forEach((input, i) => {
+      input.addEventListener("input", (e) => {
+
+        if (
+          i ===
+          [this.rutClientInput, this.passHashClientInput].filter((input) =>
+            input.closest(".w-80.mx-auto").classList.contains("hidden")
+              ? input.closest(".w-80.mx-auto").classList.contains("hidden")
+              : [this.rutClientInput, this.passHashClientInput],
+          ).length -
+            1
+        ) {
+          this.btnFormLogin.classList.remove("disable");
+        }
+
+        if (this.passHashClientInput.value === "") {
+          this.btnFormLogin.classList.add("disable");
+        }
+
+        verifyInputValue({
+          name: e.target.name,
+          value: e.target.value,
+        });
+      });
+    });
+
+    this.loginUser.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const valueRutClientInput = this.rutClientInput.value;
+      const valuePassHashClientInput = this.passHashClientInput.value;
+
       const res = auth.loginUser({
         username: valueRutClientInput,
-        passHashUser: valuePassHashClientInput
-      })
+        passHashUser: valuePassHashClientInput,
+      });
 
       if (!res) {
         const errorModal = Modal({
-          context: 'Error al ingresar',
-          title: 'Error',
-        })
+          context: "Error al ingresar",
+          title: "Error",
+        });
 
-        document.body.appendChild(errorModal)
-        return
+        document.body.appendChild(errorModal);
+        resetForm(this.loginUser);
+        return;
       }
-      
 
-      window.location.href = "index.html"
-    })
+      resetForm(this.loginUser);
+      window.location.href = "index.html";
+    });
   }
 };

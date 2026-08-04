@@ -79,6 +79,11 @@
         transform: translateY(-2px);
         background: rgba(6, 40, 61, 0.07);
       }
+
+      .disable {
+        pointer-events: none;
+        opacity: .5;
+      }
     </style>
   </head>
   <body class="bg-slate-100/50 h-screen">
@@ -97,7 +102,10 @@
             <button class="md:hidden" id="btnMenuToggle">
               <i class="fa-solid fa-bars fa-2xl"></i>
             </button>
-            <div class="absolute w-full left-0 top-full bg-cyan-800/50 hidden" id="menuToggle">
+            <div
+              class="absolute w-full left-0 top-full bg-cyan-800/50 hidden"
+              id="menuToggle"
+            >
               <ul class="flex flex-col gap-2">
                 <li class="px-4 py-4"><a href="#">1</a></li>
                 <li class="px-4 py-4"><a href="#">2</a></li>
@@ -112,10 +120,10 @@
     <main>
       <section>
         <div class="container">
-          <div
-            class="flex flex-col justify-center items-center  rounded-b-4xl"
-          >
-            <div class="flex flex-col gap-4 text-white items-center py-6 pt-10 bg-cyan-900 w-full">
+          <div class="flex flex-col justify-center items-center rounded-b-4xl">
+            <div
+              class="flex flex-col gap-4 text-white items-center py-6 pt-10 bg-cyan-900 w-full"
+            >
               <div class="text-6xl border border-2 p-5 py-6 rounded-full">
                 <i class="fa-solid fa-user"></i>
               </div>
@@ -128,7 +136,10 @@
               <form id="loginUser">
                 <div class="bg-cyan-900 px-4 py-8 rounded-b-2xl">
                   <div class="w-80 mx-auto mb-4">
-                    <label for="rutClient" class="text-white text-xl mb-3 block text-start">
+                    <label
+                      for="rutClient"
+                      class="text-white text-xl mb-3 block text-start"
+                    >
                       Ingrese su RUT
                     </label>
                     <input
@@ -136,24 +147,31 @@
                       id="rutClient"
                       name="rutClient"
                       placeholder="12.345.678-k"
-                      class="w-full border border-white rounded-lg placeholder:text-white px-4 py-3"
+                      class="text-white w-full border border-white rounded-lg placeholder:text-white px-4 py-3"
                     />
                   </div>
                   <div class="w-80 mx-auto">
-                    <label for="passHashClient" class="text-white text-xl mb-3 block text-start">
+                    <label
+                      for="passHashClient"
+                      class="text-white text-xl mb-3 block text-start"
+                    >
                       Password
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       id="passHashClient"
                       name="passHashClient"
                       placeholder="*******"
-                      class="w-full border border-white rounded-lg placeholder:text-white px-4 py-3"
+                      class="text-white w-full border border-white rounded-lg placeholder:text-white px-4 py-3"
                     />
                   </div>
                 </div>
                 <div class="flex justify-center items-center">
-                  <button type="submit" class="w-80 mt-3 rounded-2xl bg-cyan-900 py-3 text-white text-xl" id="btnFormLogin">
+                  <button
+                    type="submit"
+                    class="w-80 mt-3 rounded-2xl bg-cyan-900 py-3 text-white text-xl disable"
+                    id="btnFormLogin"
+                  >
                     Ingresar
                   </button>
                 </div>

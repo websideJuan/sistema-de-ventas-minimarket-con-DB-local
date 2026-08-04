@@ -1,4 +1,5 @@
 import { Modal } from "./components/modal/modal.js";
+import { auth } from "./scripts/auth.js";
 
 const fetchDatabase = async function () {
   try {
@@ -8,6 +9,10 @@ const fetchDatabase = async function () {
     throw new Error(error.message);
   }
 };
+
+if (!auth.verifySessionActive()) {
+  window.location.href = "test.html";
+}
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
