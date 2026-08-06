@@ -155,6 +155,10 @@ const startTheSalesDay = () => {
   document.body.appendChild(modal);
 };
 
+document.querySelector("#btnMenuOptions").addEventListener("click", () => {
+  document.querySelector("#toggleMenuSetting").classList.toggle("hidden");
+});
+
 document.querySelector("#initDailySale").addEventListener("click", (e) => {
   const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
   if (!dataDailySale) {
@@ -167,14 +171,15 @@ document.querySelector("#initDailySale").addEventListener("click", (e) => {
       }),
     );
 
-    e.target.querySelector('div[data-id="badgeNotification"]').remove();
+    e.target
+      .querySelector('div[data-id="badgeNotification"]')
+      .classList.add("hidden");
   }
 
   if (dataDailySale && Number(dataDailySale.cashOnHand) > 0) {
     const modal = Modal({
       context: `Ya iniciaste el dia de ventas.`,
       title: "Ventas",
-      actions: null,
     });
 
     document.body.appendChild(modal);
@@ -223,21 +228,84 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
             let dailySalesReport = {};
 
             if (radio.checked === true) {
+              const confirmSale = {
+                context: "",
+                title: "Finalizar compra",
+              };
+
               if (radio.dataset.id === "cash") {
-                answer = prompt("Ingresa el monto pagado.");
+                confirmSale.context = `
+                  <div>
+                    <p>Monto pagado</p>
+                    <div class="flex gap-4 items-center" data-id="amountPaid">
+                      ${
+                        totalPrice > 10000
+                          ? ["15000", "20000"]
+                              .map(
+                                (cash) =>
+                                  `<button class="border border-gray-300 text-xl">${cash}</button>`,
+                              )
+                              .join(" ")
+                          : ["5000", "10000"]
+                              .map(
+                                (cash) =>
+                                  `<button class="border border-gray-300 text-xl">${cash}</button>`,
+                              )
+                              .join(" ")
+                      }
+                      <button>
+                        Otro
+                      </button>
+                    </div>
+                  </div>
+                `;
                 dailySalesReport.amountPaid = answer;
               } else {
-                answer = prompt("Opere su tarjeta.");
-                dailySalesReport.codeOperation = answer;
+                confirmSale.context = "Post de venta activado...";
+                dailySalesReport.codeOperation = "50041";
               }
+
+              const modalConfirmSale = Modal({
+                context: confirmSale.context,
+                title: confirmSale.title,
+              });
+
+              document.body.appendChild(modalConfirmSale);
+
+              const amountPaid = document?.querySelector(
+                'div[data-id="amountPaid"]',
+              );
+
+              dailySalesReport.methodPay = radio.dataset.id;
+              dailySalesReport.totalPrice = totalPrice;
+
+              amountPaid.addEventListener("click", (e) => {
+                console.log(e.target.tagName);
+
+                if (e.target.tagName === "BUTTON") {
+                  const change = Number(e.target.textContent) - totalPrice;
+                  dailySalesReport.amountPaid = e.target.textContent;
+                  dailySalesReport.change = change;
+
+                  const changeOfClient = Modal({
+                    context: `El vuelto que se tiene que dar al cliente es: ${change}`,
+                    title: "Vuelto",
+                  });
+
+                  setTimeout(() => {
+                    modalConfirmSale.remove();
+                    modal.remove();
+                    changeOfClient.remove();
+                  }, 5000);
+
+                  document.body.appendChild(changeOfClient);
+                }
+              });
 
               cart = [];
               localStorage.setItem("cart", JSON.stringify(cart));
 
               renderCartItem();
-
-              dailySalesReport.methodPay = radio.dataset.id;
-              dailySalesReport.totalPrice = totalPrice;
 
               const dataDailySale =
                 JSON.parse(localStorage.getItem("dataDailySale")) || [];
@@ -248,18 +316,6 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                 "dataDailySale",
                 JSON.stringify(dataDailySale),
               );
-
-              const confirm = Modal({
-                context: "Gracias por su compra!",
-                title: "Compra realizada con exito!",
-              });
-
-              document.body.appendChild(confirm);
-
-              setTimeout(() => {
-                modal.remove();
-                confirm.remove();
-              }, 5000);
             }
           });
       },
@@ -541,12 +597,18 @@ document.querySelector("#dailySales").addEventListener("click", () => {
               });
 
               document.body.appendChild(successCreateReportDataDaily);
-              setTimeout(()=> {
-                successCreateReportDataDaily.remove()
-                succesClosing.remove()
-              },1000)
+              setTimeout(() => {
+                successCreateReportDataDaily.remove();
+                succesClosing.remove();
+              }, 1000);
             },
           });
+
+          const badgeNotification = document.querySelector(
+            'div[data-id="badgeNotification"]',
+          );
+
+          badgeNotification.classList.remove("hidden");
 
           document.body.appendChild(succesClosing);
           setTimeout(() => {
@@ -652,21 +714,11 @@ document.querySelector("#checkDeletAll").addEventListener("input", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
-    const badgeNotification = document.createElement("div");
-
-    badgeNotification.setAttribute("data-id", "badgeNotification");
-    badgeNotification.classList.add(
-      "absolute",
-      "-top-2",
-      "-right-2",
-      "bg-white",
-      "rounded-xl",
-      "text-red-900",
+    const badgeNotification = document.querySelector(
+      'div[data-id="badgeNotification"]',
     );
-    badgeNotification.innerHTML = `<i class="fa-solid fa-exclamation"></i>`;
 
-    document.querySelector("#initDailySale").appendChild(badgeNotification);
-
+    badgeNotification.classList.remove("hidden");
     startTheSalesDay();
   }
 

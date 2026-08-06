@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sistema de inventario</title>
+    <title>Sistema de inventario / Pagina de ventas.</title>
     <link rel="stylesheet" href="main.css" />
     <link
       rel="stylesheet"
@@ -15,12 +15,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
-    <nav class="py-4 bg-cyan-900 text-white">
+    <nav class="py-4 bg-cyan-900 text-white relative">
       <div class="flex justify-between container mx-auto">
         <a href="#">LOGOTIPO</a>
-        <button>
+        <button id="btnMenuOptions">
           <i class="fa-solid fa-gear"></i>
-          <a href="#">Settings</a>
+          <a href="#">
+            Settings
+            <div class="absolute top-full right-40 text-black hidden" id="toggleMenuSetting">
+              <ul class="px-2 p-3 bg-white shadow-lg z-10 rounded">
+                <li><a href="logout.html" class="text-nowrap">Finalizar session</a></li>
+              </ul>
+            </div>
+          </a>
         </button>
       </div>
     </nav>
@@ -31,6 +38,12 @@
           id="initDailySale"
         >
           Iniciar ventas
+          <div
+            class="absolute -top-3 -right-3 bg-white rounded-full text-red-900 shadow-lg px-2 py-1 hidden"
+            data-id="badgeNotification"
+          >
+            <i class="fa-solid fa-exclamation"></i>
+          </div>
         </button>
       </div>
       <div class="flex justify-between items-center container mx-auto">
@@ -111,16 +124,15 @@
         </h2>
 
         <div id="cartHead" class="flex justify-between mb-3">
-          <button 
-              data-id="deleteElemets" 
-              class="text-gray-700 cursor-pointer">
+          <button data-id="deleteElemets" class="text-gray-700 cursor-pointer">
             Eliminar elementos
           </button>
 
           <div>
-            <button 
-              class="p-2 rounded-sm hover:bg-red-600 hover:text-white cursor-pointer transition-all" 
-              id="deleteElemetSelect">
+            <button
+              class="p-2 rounded-sm hover:bg-red-600 hover:text-white cursor-pointer transition-all"
+              id="deleteElemetSelect"
+            >
               <i class="fa-regular fa-trash-can"></i>
             </button>
             <input
