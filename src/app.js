@@ -52,25 +52,31 @@ const renderCartItem = () => {
 
     listCartProducts.appendChild(li);
 
-    const totalPriceCart = cart.reduce(
-      (acc, current) => acc + current.price.current,
-      0,
-    );
-    document.querySelector("#cartFooter").innerHTML = `
+    updateCartFooter();
+  });
+};
+
+const updateCartFooter = () => {
+  const totalPriceCart = cart.reduce(
+    (acc, current) => acc + current.price.current * current.count,
+    0,
+  );
+
+  document.querySelector("#cartFooter").innerHTML = `
       <div class="flex flex-col gap-4">
         
         <div class="flex justify-between items-center">
           <p><b>Precio Neto:</b></p> ${Math.round(totalPriceCart).toLocaleString()}
         </div>
-
+  
         <div class="flex justify-between items-center">
           <p><b>+IVA:</b></p> ${Math.round(totalPriceCart * 0.19).toLocaleString()}
         </div>
-
+  
         <div class="flex justify-between items-center">
           <p><b>Total:</b></p> ${Math.round(totalPriceCart * 1.19).toLocaleString()}
         </div>
-
+  
         <div>
           <button data-modal="addToMethodOfPay" class="w-full bg-indigo-600 text-white py-2 px-4 cursor-pointer rounded shadow hover:bg-indigo-800">
             Agregar medio de pago
@@ -78,7 +84,6 @@ const renderCartItem = () => {
         </div>
       </div>
     `;
-  });
 };
 
 const startTheSalesDay = () => {
@@ -192,7 +197,10 @@ document.querySelector("#initDailySale").addEventListener("click", (e) => {
 document.querySelector("#cartFooter").addEventListener("click", (e) => {
   if (e.target.dataset.modal === "addToMethodOfPay") {
     const totalPrice =
-      cart.reduce((acc, current) => acc + current.price.current, 0) * 1.19;
+      cart.reduce(
+        (acc, current) => acc + current.price.current * current.count,
+        0,
+      ) * 1.19;
 
     const modal = Modal({
       context: `
@@ -243,17 +251,17 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                           ? ["15000", "20000"]
                               .map(
                                 (cash) =>
-                                  `<button class="border border-gray-300 text-xl">${cash}</button>`,
+                                  `<button class="border border-gray-300 text-xl px-6 py-4">${cash}</button>`,
                               )
-                              .join(" ")
+                              .join("")
                           : ["5000", "10000"]
                               .map(
                                 (cash) =>
-                                  `<button class="border border-gray-300 text-xl">${cash}</button>`,
+                                  `<button class="border border-gray-300 text-xl px-6 py-4">${cash}</button>`,
                               )
-                              .join(" ")
+                              .join("")
                       }
-                      <button>
+                      <button class="border border-gray-300 text-xl px-6 py-4">
                         Otro
                       </button>
                     </div>
@@ -261,8 +269,18 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                 `;
                 dailySalesReport.amountPaid = answer;
               } else {
-                confirmSale.context = "Post de venta activado...";
-                dailySalesReport.codeOperation = "50041";
+                confirmSale.context = `<div>
+                    <p>Monto pagado</p>
+                    <div class="flex gap-4 items-center" data-id="amountPaid">
+                      <button class="border border-gray-300 text-xl px-6 py-4">
+                        Credito.
+                      </button>
+                      <button class="border border-gray-300 text-xl px-6 py-4">
+                        Debito.
+                      </button>
+                    </div>
+                  </div>`;
+                dailySalesReport.codeOperation = crypto.randomUUID();
               }
 
               const modalConfirmSale = Modal({
@@ -278,19 +296,46 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
 
               dailySalesReport.methodPay = radio.dataset.id;
               dailySalesReport.totalPrice = totalPrice;
+              dailySalesReport.countOfProduct = cart.length;
 
               amountPaid.addEventListener("click", (e) => {
-                console.log(e.target.tagName);
-
                 if (e.target.tagName === "BUTTON") {
-                  const change = Number(e.target.textContent) - totalPrice;
-                  dailySalesReport.amountPaid = e.target.textContent;
+                  let change = Number(e.target.textContent) - totalPrice;
+
+                  if (e.target.textContent.trim() === "Otro") {
+                    dailySalesReport.otherPay = prompt("Monto pagado: ");
+                    change = Number(dailySalesReport.otherPay) - totalPrice;
+                  }
+
+                  dailySalesReport.amountPaid = e.target.textContent.trim();
                   dailySalesReport.change = change;
 
+                  dailySalesReport.cartItems = cart.map((cartItem) => ({
+                    cartItemName: cartItem.name,
+                    cartItemCount: cartItem.count,
+                    cartItemPrice: cartItem.price,
+                  }));
+
                   const changeOfClient = Modal({
-                    context: `El vuelto que se tiene que dar al cliente es: ${change}`,
-                    title: "Vuelto",
+                    context: `${dailySalesReport.methodPay !== "byCard" ? `El vuelto que se tiene que dar al cliente es: $ ${change.toLocaleString()}` : "Continuar en transbanck..."}`,
+                    title: "Finalizar compra.",
                   });
+
+                  const dataDailySale = JSON.parse(
+                    localStorage.getItem("dataDailySale"),
+                  );
+
+                  dataDailySale.salesOfDay.push(dailySalesReport);
+
+                  localStorage.setItem(
+                    "dataDailySale",
+                    JSON.stringify(dataDailySale),
+                  );
+
+                  cart = [];
+                  localStorage.setItem("cart", JSON.stringify(cart));
+                  renderCartItem();
+                  updateCartFooter();
 
                   setTimeout(() => {
                     modalConfirmSale.remove();
@@ -301,21 +346,6 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                   document.body.appendChild(changeOfClient);
                 }
               });
-
-              cart = [];
-              localStorage.setItem("cart", JSON.stringify(cart));
-
-              renderCartItem();
-
-              const dataDailySale =
-                JSON.parse(localStorage.getItem("dataDailySale")) || [];
-
-              dataDailySale.salesOfDay.push(dailySalesReport);
-
-              localStorage.setItem(
-                "dataDailySale",
-                JSON.stringify(dataDailySale),
-              );
             }
           });
       },
@@ -502,6 +532,8 @@ document.querySelector("#dailySales").addEventListener("click", () => {
             localStorage.getItem("dataDailySale"),
           );
 
+          console.log(dataDailySale);
+
           const cashSalesOfDay = dataDailySale.salesOfDay
             .filter((saleDay) => saleDay.methodPay === "cash")
             .reduce((acc, current) => acc + current.totalPrice, 0);
@@ -580,6 +612,9 @@ document.querySelector("#dailySales").addEventListener("click", () => {
               const dataDailySale = JSON.parse(
                 localStorage.getItem("dataDailySale"),
               );
+
+              dataDailySale.currentDate = formatoFecha;
+
               const reportSalesMonth =
                 JSON.parse(localStorage.getItem("reportSalesMonth")) || [];
 
@@ -589,6 +624,7 @@ document.querySelector("#dailySales").addEventListener("click", () => {
                 "reportSalesMonth",
                 JSON.stringify(reportSalesMonth),
               );
+
               localStorage.removeItem("dataDailySale");
 
               const successCreateReportDataDaily = Modal({
@@ -696,6 +732,7 @@ document.querySelector("#deleteElemetSelect").addEventListener("click", () => {
       cart = JSON.parse(localStorage.getItem("cart"));
 
       renderCartItem();
+      updateCartFooter();
       confirm.remove();
     },
     textButton: "Eliminar",
@@ -704,11 +741,12 @@ document.querySelector("#deleteElemetSelect").addEventListener("click", () => {
   document.body.appendChild(confirm);
 });
 
-document.querySelector("#checkDeletAll").addEventListener("input", () => {
+document.querySelector("#checkDeletAll").addEventListener("input", (e) => {
   const deleteItem = document.querySelectorAll('input[data-id="deleteItem"]');
 
+  let booleanCheck = e.target.checked;
   deleteItem.forEach((inputDelete) => {
-    inputDelete.checked = true;
+    inputDelete.checked = booleanCheck;
   });
 });
 
