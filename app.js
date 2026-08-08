@@ -15,10 +15,9 @@ const main = class Main {
     this.init();
   }
   init() {
-
     if (auth.verifySessionActive()) {
       window.location.href = "index.html";
-      return
+      return;
     }
 
     if (auth.verifyLoginActive()) {
@@ -28,6 +27,7 @@ const main = class Main {
 
     const resetForm = (form) => {
       form.reset();
+      this.btnFormLogin.classList.add("disable");
     };
 
     const verifyInputValue = ({ name, value }) => {
@@ -48,7 +48,6 @@ const main = class Main {
 
     [this.rutClientInput, this.passHashClientInput].forEach((input, i) => {
       input.addEventListener("input", (e) => {
-
         if (
           i ===
           [this.rutClientInput, this.passHashClientInput].filter((input) =>
@@ -87,14 +86,12 @@ const main = class Main {
           context: "Error al ingresar",
           title: "Error",
         });
-
         document.body.appendChild(errorModal);
-        resetForm(this.loginUser);
-        return;
+      } else {
+        window.location.href = "index.html";
       }
-
+      
       resetForm(this.loginUser);
-      window.location.href = "index.html";
     });
   }
 };

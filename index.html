@@ -16,15 +16,23 @@
   </head>
   <body>
     <nav class="bg-cyan-900 text-white">
-      <div class="flex justify-between container mx-auto py-4 relative">
+      <div class="flex justify-between container mx-auto py-4 relative z-10">
         <a href="#">LOGOTIPO</a>
         <button id="btnMenuOptions">
           <i class="fa-solid fa-gear"></i>
           <a href="#">
-            Settings
-            <div class="absolute top-full right-0 text-black hidden" id="toggleMenuSetting">
-              <ul class="px-2 p-3 bg-white shadow-lg z-10 rounded">
-                <li class="px-6"><a href="logout.html" class="text-nowrap hover:text-blue-600 hover:underline">Finalizar session</a></li>
+            <div
+              class="absolute top-full right-0 text-black hidden"
+              id="toggleMenuSetting"
+            >
+              <ul class="px-2 p-3 bg-white shadow-lg rounded">
+                <li class="px-6 py-3">
+                  <a
+                    href="logout.html"
+                    class="text-nowrap hover:text-blue-600 hover:underline"
+                    >Finalizar session</a
+                  >
+                </li>
               </ul>
             </div>
           </a>

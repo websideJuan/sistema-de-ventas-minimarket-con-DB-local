@@ -10,9 +10,13 @@ const fetchDatabase = async function () {
   }
 };
 
-if (!auth.verifySessionActive()) {
+const isLoggin = auth.verifySessionActive();
+
+if (!isLoggin) {
   window.location.href = "test.html";
 }
+
+const userActive = JSON.parse(localStorage.getItem("user"));
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -110,13 +114,13 @@ const startTheSalesDay = () => {
                      <label for="cashOnHand" class="mb-3 text-gray-600 block">
                        Efectivo en caja
                      </label>
-                     <input class="w-full py-4 ps-4 border border-gray-400 rounded-xl" type="text" name="cashOnHand" data-id="cashOnHand" placeholder="10.000, 15.000, 20.000" required />
+                     <input class="w-full py-4 ps-4 border border-gray-400 rounded-xl" type="text" name="cashOnHand" data-id="cashOnHand" placeholder="10.000, 15.000, 20.000" required data-modify="seller"/>
                    </div>
                    <div class="mb-6">
                      <label for="sellerName" class="mb-3 text-gray-600 block">
                        Nombre del vendedor
                      </label>
-                     <input class="w-full py-4 ps-4 border border-gray-400 rounded-xl" type="text" name="sellerName" data-id="sellerName" placeholder="Nombre del vendedor" required />
+                     <input class="w-full py-4 ps-4 border border-gray-400 rounded-xl bg-gray-300/80 pointer-events-none" type="text" name="sellerName" data-id="sellerName" placeholder="Nombre del vendedor" value=${userActive.username} required />
                    </div>
                  </div>
                `,
@@ -125,6 +129,7 @@ const startTheSalesDay = () => {
           const cashOnHand = document.querySelector(
             'input[data-id="cashOnHand"]',
           );
+
           const sellerName = document.querySelector(
             'input[data-id="sellerName"]',
           );
@@ -143,6 +148,10 @@ const startTheSalesDay = () => {
             title: "Inicia dia de ventas.",
           });
 
+          document
+            .querySelector('div[data-id="badgeNotification"]')
+            .classList.add("hidden");
+
           document.body.appendChild(successCreateDataDailySale);
 
           setTimeout(() => {
@@ -160,12 +169,13 @@ const startTheSalesDay = () => {
   document.body.appendChild(modal);
 };
 
-document.querySelector("#btnMenuOptions").addEventListener("click", () => {
+document.querySelector("#btnMenuOptions").addEventListener("click", (e) => {
   document.querySelector("#toggleMenuSetting").classList.toggle("hidden");
 });
 
 document.querySelector("#initDailySale").addEventListener("click", (e) => {
   const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
+
   if (!dataDailySale) {
     localStorage.setItem(
       "dataDailySale",
@@ -175,10 +185,6 @@ document.querySelector("#initDailySale").addEventListener("click", (e) => {
         salesOfDay: [],
       }),
     );
-
-    e.target
-      .querySelector('div[data-id="badgeNotification"]')
-      .classList.add("hidden");
   }
 
   if (dataDailySale && Number(dataDailySale.cashOnHand) > 0) {
@@ -661,16 +667,26 @@ document.querySelector("#dailySales").addEventListener("click", () => {
   document.body.appendChild(modal);
 });
 
-// Funcionalidad en estado de prueba.
 const deleteElemets = document.querySelector("#checkDeletAll");
-
-let count = 0;
 
 document.querySelector("#listCartProducts").addEventListener("click", (e) => {
   if (e.target.tagName === "INPUT") {
-    count += 1;
+    const listTrueElement = [];
+    const deleteItem = document.querySelectorAll('input[data-id="deleteItem"]');
 
-    if (count === cart.length) {
+    deleteItem.forEach((input) => {
+      listTrueElement.push(input.checked);
+    });
+
+    const filterElement = [...deleteItem].filter(
+      (input) => input.checked === true,
+    );
+
+    if (filterElement.length !== deleteItem.length) {
+      deleteElemets.checked = false;
+    }
+
+    if (filterElement.length === deleteItem.length) {
       deleteElemets.checked = true;
     }
   }
@@ -679,6 +695,19 @@ document.querySelector("#listCartProducts").addEventListener("click", (e) => {
 document
   .querySelector('button[data-id="deleteElemets"]')
   .addEventListener("click", () => {
+    if (cart.length === 0) {
+      const cartEmpty = Modal({
+        context: 'No hay articulos en el carrito',
+        title: 'alerta'
+      })
+
+      document.body.appendChild(cartEmpty)
+      setTimeout(() => {
+        cartEmpty.remove()
+      }, 1000);
+      return
+    }
+    
     deleteElemets.classList.toggle("hidden");
     const liElementsItems = document.querySelectorAll('li[data-id="cartItem"]');
 
@@ -712,24 +741,21 @@ document.querySelector("#deleteElemetSelect").addEventListener("click", () => {
     title: "Eliminar productos",
     actions: () => {
       deleteItem.forEach((inputDelete) => {
-        if (inputDelete.checked) {
+        if (inputDelete.checked === true) {
           const id = Number(
             inputDelete.closest('li[data-id="cartItem"]').dataset.idproduct,
           );
 
-          cart.forEach((itemCart) => {
-            cart.splice(
-              cart.findIndex((itemForDelete) => inputDelete.id === id),
-              1,
-            );
-          });
+          cart.splice(
+            cart.findIndex((itemForDelete) => inputDelete.id === id),
+            1,
+          );
 
           localStorage.setItem("cart", JSON.stringify(cart));
         }
       });
 
       deleteElemets.classList.add("hidden");
-      cart = JSON.parse(localStorage.getItem("cart"));
 
       renderCartItem();
       updateCartFooter();
@@ -751,6 +777,8 @@ document.querySelector("#checkDeletAll").addEventListener("input", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  
+
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
     const badgeNotification = document.querySelector(
       'div[data-id="badgeNotification"]',
@@ -827,60 +855,31 @@ document
           const productFounded = products.find((item) => item.id === idProduct);
           let currentCount;
 
+          if (!productFounded) {
+            return;
+          }
+
           if (productFounded.price.unit.toLowerCase() === "kg") {
             currentCount = parseFloat(prompt("¿Cuantos kilogramos?"));
           } else if (productFounded.price.unit.toLowerCase() === "unidad") {
             currentCount = Number(prompt("¿Cuantas cantidades?"));
           }
-          cart.push({
-            ...productFounded,
-            count: currentCount === 0 ? 1 : currentCount,
-          });
+
+          const indexItemCart = cart.findIndex(
+            (itemCart) => itemCart.id === idProduct,
+          );
+
+          if (indexItemCart === -1) {
+            cart.push({
+              ...productFounded,
+              count: currentCount === 0 ? 1 : currentCount,
+            });
+          } else {
+            cart[indexItemCart].count = cart[indexItemCart].count + 1;
+          }
 
           localStorage.setItem("cart", JSON.stringify(cart));
           renderCartItem();
         });
       });
-
-    // .forEach((button) => {
-    //   button.addEventListener("click", (e) => {
-    //     if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
-    //       startTheSalesDay();
-    //       return;
-    //     }
-    //     const target = e.target.closest("div[data-id='cardProduct']");
-
-    //     let product = {};
-    //     product.name = target.querySelector(
-    //       "h3.text-lg.text-gray-400",
-    //     ).textContent;
-    //     product.img = target
-    //       .querySelector("img.h-full.w-full")
-    //       .getAttribute("src");
-    //     product.price = target.querySelector(
-    //       "span.text-lg.font-extrabold.text-gray-900",
-    //     ).textContent;
-    //     product.unit = target.querySelector("span#unit").textContent.trim();
-
-    //     let currentCount;
-
-    //     if (product.unit.toLowerCase() === "kg") {
-    //       currentCount = parseFloat(prompt("¿Cuantos kilogramos?"));
-    //     } else if (product.unit.toLowerCase() === "unidad") {
-    //       currentCount = Number(prompt("¿Cuantas cantidades?"));
-    //     }
-
-    //     const elementForCart = {};
-
-    //     elementForCart.name = product.name;
-    //     elementForCart.img = product.img;
-    //     elementForCart.count = currentCount;
-    //     elementForCart.price = Number(product.price) * currentCount;
-    //     elementForCart.unit = product.unit;
-
-    //     cart.push(elementForCart);
-    //     localStorage.setItem("cart", JSON.stringify(cart));
-    //     renderCartItem();
-    //   });
-    // });
   });
