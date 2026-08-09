@@ -93,13 +93,31 @@ const updateCartFooter = () => {
 const startTheSalesDay = () => {
   const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
 
-  if (!dataDailySale) {
+  if (!dataDailySale || dataDailySale.cashOnHand === 0) {
     const notDataDaily = Modal({
       context: `No has iniciado las ventas!`,
       title: "Accion requerida",
     });
 
     document.body.appendChild(notDataDaily);
+    return;
+  }
+};
+
+document.querySelector("#btnMenuOptions").addEventListener("click", (e) => {
+  document.querySelector("#toggleMenuSetting").classList.toggle("hidden");
+});
+
+document.querySelector("#initDailySale").addEventListener("click", (e) => {
+  const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
+
+  if (dataDailySale && Number(dataDailySale.cashOnHand) > 0) {
+    const modal = Modal({
+      context: `Ya iniciaste el dia de ventas.`,
+      title: "Ventas",
+    });
+
+    document.body.appendChild(modal);
     return;
   }
 
@@ -134,12 +152,12 @@ const startTheSalesDay = () => {
             'input[data-id="sellerName"]',
           );
 
-          const dataDailySale = JSON.parse(
-            localStorage.getItem("dataDailySale"),
-          );
+          const dataDailySale =
+            JSON.parse(localStorage.getItem("dataDailySale")) || {};
 
           dataDailySale.cashOnHand = cashOnHand.value;
           dataDailySale.seller = sellerName.value;
+          dataDailySale.salesOfDay = [];
 
           localStorage.setItem("dataDailySale", JSON.stringify(dataDailySale));
 
@@ -167,37 +185,6 @@ const startTheSalesDay = () => {
   });
 
   document.body.appendChild(modal);
-};
-
-document.querySelector("#btnMenuOptions").addEventListener("click", (e) => {
-  document.querySelector("#toggleMenuSetting").classList.toggle("hidden");
-});
-
-document.querySelector("#initDailySale").addEventListener("click", (e) => {
-  const dataDailySale = JSON.parse(localStorage.getItem("dataDailySale"));
-
-  if (!dataDailySale) {
-    localStorage.setItem(
-      "dataDailySale",
-      JSON.stringify({
-        cashOnHand: 0,
-        seller: "",
-        salesOfDay: [],
-      }),
-    );
-  }
-
-  if (dataDailySale && Number(dataDailySale.cashOnHand) > 0) {
-    const modal = Modal({
-      context: `Ya iniciaste el dia de ventas.`,
-      title: "Ventas",
-    });
-
-    document.body.appendChild(modal);
-    return;
-  }
-
-  startTheSalesDay();
 });
 
 document.querySelector("#cartFooter").addEventListener("click", (e) => {
@@ -331,6 +318,9 @@ document.querySelector("#cartFooter").addEventListener("click", (e) => {
                     localStorage.getItem("dataDailySale"),
                   );
 
+                  dataDailySale.cashOnHand =
+                    Number(dataDailySale.cashOnHand) - change;
+
                   dataDailySale.salesOfDay.push(dailySalesReport);
 
                   localStorage.setItem(
@@ -434,8 +424,11 @@ document.querySelector("#invoices").addEventListener("click", () => {
       <h6 class="block mb-3">
         Ingresa el numero de la factura
       </h6>
+      <p class="text-gray-400">
+        Para crear una Factura necesitas ingresar el numero, monto, cantidad de articulos.
+      </p>
       <div>
-        <label for="invoiceId">
+        <label for="invoiceId" class="block mb-3">
           N° de factura.
         </label>
         <input 
@@ -454,37 +447,41 @@ document.querySelector("#invoices").addEventListener("click", () => {
       if (invoiceId.value === "" && invoiceId.value.length === 0) {
         const inputError = Modal({
           context: `El campo numero de factura no puede estar vacio!`,
-          title: "ERROR!",
+          title: "Error!",
         });
         document.body.appendChild(inputError);
         return;
       }
 
-      const invoices = JSON.parse(localStorage.getItem("invoices"));
+      const invoices = JSON.parse(localStorage.getItem("invoices")) || [];
 
-      const invoceFounded = invoices.filter(
-        (invoice) => invoice.id === invoiceId.value,
-      );
-
-      if (invoceFounded.length === 0) {
-        const notFoundedInvoice = Modal({
-          context: "Factura no encontrada",
-          title: "Facturas.",
-        });
-        document.body.appendChild(notFoundedInvoice);
-        setTimeout(() => {
-          notFoundedInvoice.remove();
-        }, 1000);
-        return;
-      }
-
-      const invoceModal = Modal({
-        context: invoceFounded.map((invoce) => `${invoce.name}`),
+      const viewTemporalInvoice = Modal({
+        context: `
+          <div>
+            <h6>
+              Ingrese la informacion requerida.
+            </h6>
+            <form>
+              <div>
+                <label>
+                  Monto.
+                </label>
+                <input type="text" class="w-full"/>
+              </div>
+            </form>
+          </div>
+        `,
         title: "Factura",
+        actions: () => {
+
+        },
+        textButton: 'Siguiente'
       });
 
-      document.body.appendChild(invoceModal);
+      document.body.appendChild(viewTemporalInvoice);
+      modal.remove()
     },
+    textButton: "Crear factura"
   });
 
   document.body.appendChild(modal);
@@ -697,17 +694,17 @@ document
   .addEventListener("click", () => {
     if (cart.length === 0) {
       const cartEmpty = Modal({
-        context: 'No hay articulos en el carrito',
-        title: 'alerta'
-      })
+        context: "No hay articulos en el carrito",
+        title: "alerta",
+      });
 
-      document.body.appendChild(cartEmpty)
+      document.body.appendChild(cartEmpty);
       setTimeout(() => {
-        cartEmpty.remove()
+        cartEmpty.remove();
       }, 1000);
-      return
+      return;
     }
-    
+
     deleteElemets.classList.toggle("hidden");
     const liElementsItems = document.querySelectorAll('li[data-id="cartItem"]');
 
@@ -777,8 +774,6 @@ document.querySelector("#checkDeletAll").addEventListener("input", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
     const badgeNotification = document.querySelector(
       'div[data-id="badgeNotification"]',
@@ -865,6 +860,10 @@ document
             currentCount = Number(prompt("¿Cuantas cantidades?"));
           }
 
+          if (currentCount === 0) {
+            return
+          }
+
           const indexItemCart = cart.findIndex(
             (itemCart) => itemCart.id === idProduct,
           );
@@ -872,7 +871,7 @@ document
           if (indexItemCart === -1) {
             cart.push({
               ...productFounded,
-              count: currentCount === 0 ? 1 : currentCount,
+              count: currentCount,
             });
           } else {
             cart[indexItemCart].count = cart[indexItemCart].count + 1;
