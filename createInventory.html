@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de inventario / Crea tu inventario</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+      integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-200">
+    <div
+      class="max-w-xl m-auto py-8 px-8 shadow-lg h-screen bg-white"
+      id="containerSteps"
+    ></div>
+
+    <script>
+      const CONTAINERSTEPS = document.querySelector("#containerSteps");
+      const CURRENTSTEP = document.createElement("div");
+      const TITLESTEP = document.createElement("h5");
+      let currentStep = Number(localStorage.getItem("currentStep")) || 0;
+
+      const steps = [
+        {
+          titleStep: "Ingresa tu informacion",
+          formInformation: [
+            {
+              value: "Tipo de negocio",
+              name: "typeBusiness",
+              placeholder: "Minimarket, Botilleria, Etc...",
+              type: "text",
+            },
+            {
+              value: "Numero trabadores",
+              name: "personal",
+              placeholder: "1 al 20.",
+              type: "text",
+            },
+            {
+              value: "Administrador del inventario",
+              name: "adminDatabase",
+              placeholder: "Podra administrar el inventario.",
+              type: "text",
+            },
+            {
+              value: "Defina la contrsaña.",
+              name: "credentialAdmin",
+              placeholder: "password",
+              type: "password",
+            },
+          ],
+        },
+        {
+          titleStep: "Ingresa el o los productos.",
+          formInformation: [
+            {
+              value: "Categoria",
+              name: "category",
+              placeholder: "Liquidos, Verduras, Panaderia.",
+              type: "text",
+            },
+            {
+              value: "Nombre del producto",
+              name: "nameProduct",
+              placeholder: "Jugo whatts 2ltrs",
+              type: "text",
+            },
+            {
+              value: "Cantidad",
+              name: "count",
+              placeholder: "1-50",
+              type: "text",
+            },
+          ],
+        },
+        {
+          titleStep: "Configura tu vista.",
+          formInformation: [
+            {
+              value: "Alerta de stock",
+              name: "alertStock",
+              placeholder:
+                "Activa una alerta al tener un producto con stock bajo.",
+              type: "checkbox",
+            },
+          ],
+        },
+      ];
+
+      if (currentStep > steps.length - 1) {
+        window.location.href = "test.html";
+      }
+
+      
+
+
+      const renderFormSteps = (form) => {
+        const childStape = document.createElement("form");
+        const buttonSubmit = document.createElement("button");
+
+        childStape.classList.add(
+          "flex",
+          "flex-col",
+          "gap-6",
+          "max-w-xl",
+          "mx-auto",
+        );
+
+        childStape.innerHTML = `
+          ${form
+            .map(
+              (input) => `
+            <div class="flex flex-col gap-3">
+              <label for="${input.name}" class="text-lg text-gray-400">
+                ${input.value}
+              </label>
+              <input 
+                type="${input.type}"
+                class="w-full border border-gray-500 py-3 rounded ps-4"
+                placeholder="${input.placeholder}"
+                name="${input.name}"
+              />
+            </div>
+          `,
+            )
+            .join("")}
+        `;
+
+        buttonSubmit.textContent = "Continuar";
+        buttonSubmit.type = "submit";
+        buttonSubmit.classList.add(
+          "border-4",
+          "border-cyan-900",
+          "py-2",
+          "rounded-xl",
+          "text-xl",
+          "font-bold",
+          "text-gray-600",
+          "cursor-pointer",
+        );
+
+        childStape.appendChild(buttonSubmit);
+
+
+        
+        childStape.addEventListener("submit", (e) => {
+          e.preventDefault();
+          CURRENTSTEP.innerHTML = "";
+
+          const errors = [];
+          const values = [];
+
+          document.querySelectorAll("input").forEach((INPUT) => {
+            if (INPUT.value === "" || INPUT.value.length === 0) {
+              errors.push({
+                message: `El campo ${INPUT.name} no puede estar vacio!`,
+              });
+            } else {
+              values.push({
+                [INPUT.name]: INPUT.value,
+              });
+            }
+          });
+
+          if (errors.length !== 0) {
+            let modal = document.createElement("div");
+            modal.innerHTML = errors
+              .map((error) => `<span>${error.message}</span>`)
+              .join("<br/>");
+
+            document.body.appendChild(modal);
+            return;
+          }
+
+          if (currentStep === 0) {
+            localStorage.setItem(
+              "business",
+              JSON.stringify({
+                businessInformation: values,
+                listProducts: [],
+                config: [],
+              }),
+            );
+          } 
+          else if (currentStep === 1) {
+            const business = JSON.parse(localStorage.getItem("business"));
+            business.listProducts = values;
+
+            localStorage.setItem("business", JSON.stringify(business));
+          } 
+          else if (currentStep === 2) {
+            const business = JSON.parse(localStorage.getItem("business"));
+            business.config = values;
+
+            localStorage.setItem("business", JSON.stringify(business));
+          }
+          
+          
+          TITLESTEP.textContent = steps[currentStep].titleStep;
+
+          currentStep++;
+          localStorage.setItem("currentStep", currentStep);
+          
+          CURRENTSTEP.appendChild(TITLESTEP);
+          CURRENTSTEP.appendChild(
+            renderFormSteps(steps[currentStep].formInformation),
+          );
+
+          window.location.href = "test.html";
+        });
+
+        return childStape;
+      };
+
+      TITLESTEP.classList.add(
+        "text-5xl",
+        "text-gray-700",
+        "text-center",
+        "block",
+        "mb-10",
+      );
+      
+      TITLESTEP.textContent = steps[currentStep].titleStep;
+      CURRENTSTEP.appendChild(TITLESTEP);
+      CURRENTSTEP.appendChild(
+        renderFormSteps(steps[currentStep].formInformation),
+      );
+
+      CONTAINERSTEPS.appendChild(CURRENTSTEP);
+    </script>
+  </body>
+</html>
