@@ -13,9 +13,9 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="bg-gray-200">
+  <body class="bg-gray-50">
     <div
-      class="max-w-xl m-auto py-8 px-8 shadow-lg h-screen bg-white"
+      class="max-w-xl m-auto h-screen flex justify-center items-center"
       id="containerSteps"
     ></div>
 
@@ -23,7 +23,40 @@
       const CONTAINERSTEPS = document.querySelector("#containerSteps");
       const CURRENTSTEP = document.createElement("div");
       const TITLESTEP = document.createElement("h5");
+      const childStape = document.createElement("form");
+      const buttonSubmit = document.createElement("button");
+
       let currentStep = Number(localStorage.getItem("currentStep")) || 0;
+
+      CURRENTSTEP.classList.add("bg-white", "rounded-lg", "p-8", "shadow-lg");
+      TITLESTEP.classList.add(
+        "text-5xl",
+        "text-gray-700",
+        "text-center",
+        "block",
+        "mb-10",
+      );
+
+      childStape.classList.add(
+        "flex",
+        "flex-col",
+        "gap-6",
+        "max-w-xl",
+        "mx-auto",
+      );
+
+      buttonSubmit.textContent = "Continuar";
+      buttonSubmit.type = "submit";
+      buttonSubmit.classList.add(
+        "border-4",
+        "border-cyan-900",
+        "py-2",
+        "rounded-xl",
+        "text-xl",
+        "font-bold",
+        "text-gray-600",
+        "cursor-pointer",
+      );
 
       const steps = [
         {
@@ -33,12 +66,26 @@
               value: "Tipo de negocio",
               name: "typeBusiness",
               placeholder: "Minimarket, Botilleria, Etc...",
-              type: "text",
+              type: "select",
+              options: [
+                "Almacén",
+                "Minimarket",
+                "Botillería",
+                "Tiendas de ventas (varios)",
+                "Petshop",
+                "Locales de comida",
+              ],
             },
             {
               value: "Numero trabadores",
               name: "personal",
               placeholder: "1 al 20.",
+              type: "text",
+            },
+            {
+              value: "Cantidad de productos",
+              name: "countProducts",
+              placeholder: "Maximo 100",
               type: "text",
             },
             {
@@ -92,144 +139,122 @@
         },
       ];
 
-      if (currentStep > steps.length - 1) {
-        window.location.href = "test.html";
-      }
+      document.addEventListener("DOMContentLoaded", (e) => {
+        const values = [];
 
-      
+        document.querySelector("form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          let error = false;
+          let value = {}
 
+
+          const business = JSON.parse(localStorage.getItem('business')) || {
+            businessInformation: [],
+            listProducts: [],
+            config: [],
+          } ;
+
+          document.querySelectorAll("input").forEach((INPUT) => {
+            if (INPUT.value === "" || INPUT.value.length === 0) {
+              error = true;
+            } else {
+              value = {
+                ...value,
+                [INPUT.name]:INPUT.value
+              };
+            }
+          });
+
+          if (error) {
+            createModal({
+              title: "Error!",
+              text: "Los campos (*) son obligatorios!",
+            });
+            return;
+          }
+
+
+
+          if (currentStep === 0) {
+            business.businessInformation = value
+          } else if (currentStep === 1) {
+            business.listProducts = value;
+          } else if (currentStep === 2) {
+            business.config = value;
+            window.location.href = 'test.html'
+          }
+
+          currentStep++;
+          localStorage.setItem("currentStep", currentStep);
+          localStorage.setItem("business", JSON.stringify(business));
+
+          updateUI();
+        });
+      });
 
       const renderFormSteps = (form) => {
-        const childStape = document.createElement("form");
-        const buttonSubmit = document.createElement("button");
-
-        childStape.classList.add(
-          "flex",
-          "flex-col",
-          "gap-6",
-          "max-w-xl",
-          "mx-auto",
-        );
-
         childStape.innerHTML = `
           ${form
             .map(
               (input) => `
-            <div class="flex flex-col gap-3">
-              <label for="${input.name}" class="text-lg text-gray-400">
-                ${input.value}
-              </label>
-              <input 
-                type="${input.type}"
-                class="w-full border border-gray-500 py-3 rounded ps-4"
-                placeholder="${input.placeholder}"
-                name="${input.name}"
-              />
-            </div>
-          `,
+                <div class="flex flex-col gap-3">
+                  <label for="${input.name}" class="text-lg text-gray-400">
+                    ${input.value} (*)
+                  </label>
+                  <input 
+                    type="${input.type}"
+                    class="w-full border border-gray-500 py-3 rounded-lg ps-4"
+                    placeholder="${input.placeholder}"
+                    name="${input.name}"
+                    data-selector="true"
+                  />
+                </div>
+              `,
             )
             .join("")}
         `;
 
-        buttonSubmit.textContent = "Continuar";
-        buttonSubmit.type = "submit";
-        buttonSubmit.classList.add(
-          "border-4",
-          "border-cyan-900",
-          "py-2",
-          "rounded-xl",
-          "text-xl",
-          "font-bold",
-          "text-gray-600",
-          "cursor-pointer",
-        );
-
         childStape.appendChild(buttonSubmit);
-
-
-        
-        childStape.addEventListener("submit", (e) => {
-          e.preventDefault();
-          CURRENTSTEP.innerHTML = "";
-
-          const errors = [];
-          const values = [];
-
-          document.querySelectorAll("input").forEach((INPUT) => {
-            if (INPUT.value === "" || INPUT.value.length === 0) {
-              errors.push({
-                message: `El campo ${INPUT.name} no puede estar vacio!`,
-              });
-            } else {
-              values.push({
-                [INPUT.name]: INPUT.value,
-              });
-            }
-          });
-
-          if (errors.length !== 0) {
-            let modal = document.createElement("div");
-            modal.innerHTML = errors
-              .map((error) => `<span>${error.message}</span>`)
-              .join("<br/>");
-
-            document.body.appendChild(modal);
-            return;
-          }
-
-          if (currentStep === 0) {
-            localStorage.setItem(
-              "business",
-              JSON.stringify({
-                businessInformation: values,
-                listProducts: [],
-                config: [],
-              }),
-            );
-          } 
-          else if (currentStep === 1) {
-            const business = JSON.parse(localStorage.getItem("business"));
-            business.listProducts = values;
-
-            localStorage.setItem("business", JSON.stringify(business));
-          } 
-          else if (currentStep === 2) {
-            const business = JSON.parse(localStorage.getItem("business"));
-            business.config = values;
-
-            localStorage.setItem("business", JSON.stringify(business));
-          }
-          
-          
-          TITLESTEP.textContent = steps[currentStep].titleStep;
-
-          currentStep++;
-          localStorage.setItem("currentStep", currentStep);
-          
-          CURRENTSTEP.appendChild(TITLESTEP);
-          CURRENTSTEP.appendChild(
-            renderFormSteps(steps[currentStep].formInformation),
-          );
-
-          window.location.href = "test.html";
-        });
 
         return childStape;
       };
 
-      TITLESTEP.classList.add(
-        "text-5xl",
-        "text-gray-700",
-        "text-center",
-        "block",
-        "mb-10",
-      );
-      
-      TITLESTEP.textContent = steps[currentStep].titleStep;
-      CURRENTSTEP.appendChild(TITLESTEP);
-      CURRENTSTEP.appendChild(
-        renderFormSteps(steps[currentStep].formInformation),
-      );
+      const updateUI = () => {
+        TITLESTEP.textContent = steps[currentStep].titleStep;
+        CURRENTSTEP.appendChild(TITLESTEP);
+        CURRENTSTEP.appendChild(
+          renderFormSteps(steps[currentStep].formInformation),
+        );
+      };
+
+      const createModal = ({ title, text }) => {
+        const modal = document.createElement("div");
+        modal.innerHTML = `
+        <div class="fixed inset-0 flex justify-center items-center bg-gray-900/60">
+          <div class="flex flex-col w-xl p-6 bg-white gap-8 rounded-xl">
+            <div class="flex justify-between">
+              <h5 class="text-3xl text-gray-400"><i class="fa-solid fa-circle-exclamation"></i></h5>
+              <button data-selector="btnCloseModal" class="cursor-pointer text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-x"></i>
+              </button>
+            </div>
+            <div>
+              <span>${text}</span>
+            </div>
+          </div>
+
+        </div>
+        `;
+
+        modal
+          .querySelector('[data-selector="btnCloseModal"]')
+          .addEventListener("click", () => {
+            modal.remove();
+          });
+
+        document.body.appendChild(modal);
+      };
+      updateUI();
 
       CONTAINERSTEPS.appendChild(CURRENTSTEP);
     </script>
