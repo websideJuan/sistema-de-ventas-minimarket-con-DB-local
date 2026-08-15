@@ -51,67 +51,96 @@
         </div>
       </div>
     </nav>
-    <div
+    <main
       class="min-h-screen max-w-6xl flex items-center justify-center mx-auto"
-      id="containerSteps"
-    ></div>
+    >
+      <div
+        class="rounded-lg px-8 py-8 pb-12 mb-12 flex flex-col gap-6 lg:flex-row"
+      >
+        <div class="lg:w-xl text-5xl text-gray-400 text-center" id="titleStep">
+          <div class="flex flex-col items-center gap-10 h-full justify-center">
+            <h5>Registro de usuario</h5>
+            <img
+              src="public/register.png"
+              alt=""
+              class="opacity-7 w-80 h-80 mx-auto"
+            />
+          </div>
+        </div>
+
+        <form class="lg:w-2xl">
+          <div
+            class="fixed right-0 w-full left-0 bottom-0 flex justify-center lg:justify-end gap-4 py-4 px-0 lg:px-12 bg-gray-200"
+          >
+            <button
+              type="button"
+              class="bg-white text-cyan-900 border-2 border-cyan-900 px-12 py-2 rounded-3xl cursor-pointer"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="bg-cyan-900 text-white px-12 py-2 rounded-3xl cursor-pointer"
+            >
+              Continuar
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
 
     <script>
       const CONTAINERSTEPS = document.querySelector("#containerSteps");
-      const CURRENTSTEP = document.createElement("div");
-      const TITLESTEP = document.createElement("div");
-      const childStape = document.createElement("form");
-      const footerForm = document.createElement("div");
+      const titleStep = document.querySelector("#titleStep");
+      const form = document.querySelector("form");
 
-      let currentStep = Number(localStorage.getItem("currentStep")) || 0;
-
-      TITLESTEP.classList.add(
-        "lg:w-xl",
-        "text-5xl",
-        "text-gray-400",
-        "text-center",
-        "block",
-      );
-
-      CURRENTSTEP.classList.add(
-        "rounded-lg",
-        "px-8",
-        "py-8",
-        "pb-12",
-        "mb-12",
-        "flex",
-        "flex-col",
-        "gap-6",
-        "lg:flex-row",
-      );
-
-      childStape.classList.add(
-        "flex",
-        "flex-col",
-        "gap-6",
-        "lg:w-2xl",
-        "justify-center",
-      );
-
-      footerForm.classList.add(
-        "fixed",
-        "right-0",
-        "w-full",
-        "left-0",
-        "bottom-0",
-        "flex",
-        "justify-center",
-        "lg:justify-end",
-        "gap-4",
-        "py-4",
-        "px-0",
-        "lg:px-12",
-        "bg-gray-200",
-      );
+      let step = Number(localStorage.getItem("step")) || 0;
 
       const steps = [
         {
-          titleStep: "Informacion Personal",
+          title: "Cuenta.",
+          formInformation: [
+            {
+              value: "Nombres",
+              name: "userFirstNames",
+              placeholder: "Necesario para el inicio de session.",
+              type: "text",
+            },
+            {
+              value: "Apellidos",
+              name: "userLastNames",
+              placeholder: "Necesario para el inicio de session.",
+              type: "text",
+            },
+            {
+              value: "RUT",
+              name: "userDNI",
+              placeholder: "11.111.111-1",
+              type: "text",
+            },
+            {
+              value: "Correo de contacto",
+              name: "userEmail",
+              placeholder: "example@gmail.com",
+              type: "text",
+            },
+            {
+              value: "Contaseña",
+              name: "userCredHas",
+              placeholder: "* * * * * * * *",
+              type: "password",
+            },
+            {
+              value: "Repetir Contaseña",
+              name: "repetUserCredHas",
+              placeholder: "* * * * * * * *",
+              type: "password",
+            },
+          ],
+          urlImage: "public/register.png",
+        },
+        {
+          title: "Negocio.",
           formInformation: [
             {
               value: "Tipo de negocio",
@@ -139,17 +168,11 @@
               placeholder: "Podra administrar el inventario.",
               type: "text",
             },
-            {
-              value: "Defina la contrsaña.",
-              name: "credentialAdmin",
-              placeholder: "password",
-              type: "password",
-            },
           ],
           urlImage: "public/privacy-policy.png",
         },
         {
-          titleStep: "Ingresa el o los productos.",
+          title: "Inventario",
           formInformation: [
             {
               value: "Categoria",
@@ -173,7 +196,7 @@
           urlImage: "public/to-do-list.png",
         },
         {
-          titleStep: "Configura tu vista.",
+          title: "Configuracion",
           formInformation: [
             {
               value: "Alerta de stock",
@@ -190,12 +213,15 @@
       document.addEventListener("DOMContentLoaded", (e) => {
         const values = [];
 
-        document.querySelector("form").addEventListener("submit", (e) => {
+        updateUI(step);
+
+        form.addEventListener("submit", (e) => {
           e.preventDefault();
           let error = false;
           let value = {};
 
           const business = JSON.parse(localStorage.getItem("business")) || {
+            user: {},
             businessInformation: [],
             listProducts: [],
             config: [],
@@ -222,89 +248,85 @@
             return;
           }
 
-          if (currentStep === 0) {
+          if (step === 0) {
+            business.user = {
+              ...value,
+              role: "admin",
+              createdAdd: [
+                new Date().getDate(),
+                new Date().getMonth() + 1,
+                new Date().getFullYear(),
+              ].join("/"),
+            }
+          } else if (step === 1) {
             business.businessInformation = value;
-            CURRENTSTEP.classList.add("flex-row-reverse");
-          } else if (currentStep === 1) {
-            console.log("paso por aqui");
+          } else if (step === 2) {
             business.listProducts = value;
-          } else if (currentStep === 2) {
+          } else if (step === 3) {
             business.config = value;
-            window.location.href = "test.html";
           }
 
-          currentStep++;
-          localStorage.setItem("currentStep", currentStep);
+          step++;
+          localStorage.setItem("step", step);
           localStorage.setItem("business", JSON.stringify(business));
 
-          updateUI();
+          updateUI(step);
         });
       });
 
-      const renderFormSteps = (form) => {
-        childStape.innerHTML = `
-          ${form
-            .map((input) =>
-              input.type !== "select"
-                ? `
-                <div class="flex flex-col gap-3">
-                  <label for="${input.name}" class="text-lg text-gray-400">
-                    ${input.value} <span class="text-gray-900">(*)</span>
-                  </label>
-                  <input 
-                    type="${input.type}"
-                    class="border border-gray-500 py-3 rounded-lg ps-4 focus:placeholder:text-gray-900"
-                    placeholder="${input.placeholder}"
-                    name="${input.name}"
-                    data-selector="true"
-                  />
-                </div>
-              `
-                : `
-                <div class="flex flex-col gap-3">
-                  <label class="text-lg text-gray-400">
-                    ${input.value} <span class="text-gray-900">(*)</span>
-                  </label>
-                  <select 
-                    class="border border-gray-500 py-3 rounded-lg ps-4 text-gray-400 focus:text-gray-900"
-                    for="${input.name}" 
-                    data-selector="true" 
-                    name="${input.name}"
-                  >
-                    <option value="">-- Selecciona un tipo de negocio --</option>
-                    ${input.options.map((option) => `<option value="${option}">${option}</option>`)}
-                  </select>
-                </div>
-              `,
-            )
-            .join("")}
-        `;
+      const renderFormSteps = (input) => {
+        const business = JSON.parse(localStorage.getItem('business'))
 
-        footerForm.innerHTML = `
-          <button type="button" class="bg-white text-cyan-900 border-2 border-cyan-900 px-12 py-3 rounded-3xl cursor-pointer">
-            Cancelar
-          </button>      
-          <button type="submit" class="bg-cyan-900 text-white px-12 py-3 rounded-3xl cursor-pointer">
-            Continuar
-          </button>
-        `;
+        const formControl = document.createElement("div");
+        formControl.classList.add("flex", "flex-col", "mb-4", "gap-3");
 
-        childStape.appendChild(footerForm);
 
-        return childStape;
+        formControl.innerHTML +=
+          input.type !== "select"
+            ? `
+            <label for="${input.name}" class="text-lg text-gray-400">
+              ${input.value} <span class="text-gray-900">(*)</span>
+            </label>
+            <input 
+              type="${input.type}"
+              class="border border-gray-500 py-3 rounded-lg ps-4 focus:placeholder:text-gray-900 ${input.name === `adminDatabase` ? 'pointer-events-none bg-gray-800/10' : ''}"
+              placeholder="${input.placeholder}"
+              name="${input.name}"
+              data-selector="true"
+              ${input.name === `adminDatabase` ? `value="${business.user.userFirstNames}"` : ''}
+            />`
+            : `
+            <label class="text-lg text-gray-400">
+              ${input.value} <span class="text-gray-900">(*)</span>
+            </label>
+            <select 
+              class="border border-gray-500 py-3 rounded-lg ps-4 text-gray-400 focus:text-gray-900"
+              for="${input.name}" 
+              data-selector="true" 
+              name="${input.name}"
+            >
+              <option value="">-- Selecciona un tipo de negocio --</option>
+              ${input.options.map((option) => `<option value="${option}">${option}</option>`)}
+            </select>
+              `;
+
+        return formControl;
       };
 
-      const updateUI = () => {
-        TITLESTEP.innerHTML = `
+      const updateUI = (currentStep) => {
+        titleStep.innerHTML = `
           <div class="flex flex-col items-center gap-10 h-full justify-center">
-            <h5>${steps[currentStep].titleStep}</h5>
+            <h5>${steps[currentStep].title}</h5>
             <img src=${steps[currentStep].urlImage} alt="" class="opacity-7 w-80 h-80 mx-auto">
           </div>
         `;
-        CURRENTSTEP.appendChild(TITLESTEP);
-        CURRENTSTEP.appendChild(
-          renderFormSteps(steps[currentStep].formInformation),
-        );
+
+        form.querySelectorAll('div.flex.flex-col.mb-4.gap-3').forEach(input => input.remove())
+        form.classList.add('flex', 'flex-col-reverse')
+
+        steps[currentStep].formInformation.forEach((formInput) => {
+          form.insertAdjacentElement("afterbegin", renderFormSteps(formInput));
+        });
       };
 
       const createModal = ({ title, text }) => {
@@ -337,9 +359,6 @@
 
         document.body.appendChild(modal);
       };
-      updateUI();
-
-      CONTAINERSTEPS.appendChild(CURRENTSTEP);
     </script>
   </body>
 </html>
