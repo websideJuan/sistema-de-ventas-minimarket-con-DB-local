@@ -19,56 +19,19 @@
         <div
           class="flex justify-between items-center py-6 relative z-10 relative"
         >
-          <a href="#" class="text-4xl/7 font-bold text-cyan-900"> Inventory </a>
-
-          <div
-            class="absolute top-full left-0 right-0 bg-cyan-900 z-20 hidden lg:static lg:z-10 lg:inset-[initial] lg:block lg:bg-transparent"
-            id="toggle-menu"
-          >
-            <ul class="flex flex-col gap-8 text-xl lg:flex-row">
-              <li>
-                <a href="#aboutUs" class="text-gray-600 hover:text-gray-50">
-                  Inicio
-                </a>
-              </li>
-              <li>
-                <a href="#aboutUs" class="text-gray-600 hover:text-gray-50">
-                  Sobre Nosotros
-                </a>
-              </li>
-              <li>
-                <a href="#aboutUs" class="text-gray-600 hover:text-gray-50">
-                  Informacion
-                </a>
-              </li>
-              <li>
-                <a href="#aboutUs" class="text-gray-600 hover:text-gray-50">
-                  Preguntas frecuentes
-                </a>
-              </li>
-            </ul>
-          </div>
+          <a href="#" class="text-3xl/7 lg:text-4xl/7 font-bold text-cyan-900"> Inventory </a>
         </div>
       </div>
     </nav>
-    <main
-      class="min-h-screen max-w-6xl flex items-center justify-center mx-auto"
-    >
+    <main class="h-screen w-full lg:w-7xl lg:mx-auto">
       <div
-        class="rounded-lg px-8 py-8 pb-12 mb-12 flex flex-col gap-6 lg:flex-row"
+        class="rounded-lg px-6 lg:px-8 py-8 pb-12 mb-12 flex flex-col gap-6 lg:flex-row lg:justify-center lg:h-full"
       >
         <div class="lg:w-xl text-5xl text-gray-400 text-center" id="titleStep">
-          <div class="flex flex-col items-center gap-10 h-full justify-center">
-            <h5>Registro de usuario</h5>
-            <img
-              src="public/register.png"
-              alt=""
-              class="opacity-7 w-80 h-80 mx-auto"
-            />
-          </div>
+          <div class="flex flex-col items-center gap-10 h-full justify-center"></div>
         </div>
 
-        <form class="lg:w-2xl">
+        <form class="w-full lg:w-2xl mb-12">
           <div
             class="fixed right-0 w-full left-0 bottom-0 flex justify-center lg:justify-end gap-4 py-4 px-0 lg:px-12 bg-gray-200"
           >
@@ -257,7 +220,7 @@
                 new Date().getMonth() + 1,
                 new Date().getFullYear(),
               ].join("/"),
-            }
+            };
           } else if (step === 1) {
             business.businessInformation = value;
           } else if (step === 2) {
@@ -266,20 +229,51 @@
             business.config = value;
           }
 
-          step++;
-          localStorage.setItem("step", step);
-          localStorage.setItem("business", JSON.stringify(business));
+
+          if(step >= (Object.keys(steps).length - 1)) {
+
+            const timeElement = document.createElement('div')
+            timeElement.classList.add('fixed', 'inset-0', 'bg-black/10', 'flex', 'justify-center', 'items-center')
+            let time = 5
+            step = 0
+            localStorage.removeItem('step')
+
+            document.body.appendChild(timeElement)
+
+            const idInterval = setInterval(()=> {
+              time--
+              timeElement.innerHTML = `
+                <span>
+                  Redirigiendo en...
+                  ${time}
+                  s
+                </span>
+              `
+              if(time === 0) {
+                window.location.href = 'test.html'
+                timeElement.remove()
+                clearInterval(idInterval)
+              }
+            },1000 )
+
+          } else {
+
+            step++;
+            localStorage.setItem("step", step);
+            localStorage.setItem("business", JSON.stringify(business));
+          }
+
+
 
           updateUI(step);
         });
       });
 
       const renderFormSteps = (input) => {
-        const business = JSON.parse(localStorage.getItem('business'))
+        const business = JSON.parse(localStorage.getItem("business"));
 
         const formControl = document.createElement("div");
         formControl.classList.add("flex", "flex-col", "mb-4", "gap-3");
-
 
         formControl.innerHTML +=
           input.type !== "select"
@@ -289,11 +283,11 @@
             </label>
             <input 
               type="${input.type}"
-              class="border border-gray-500 py-3 rounded-lg ps-4 focus:placeholder:text-gray-900 ${input.name === `adminDatabase` ? 'pointer-events-none bg-gray-800/10' : ''}"
+              class="border border-gray-500 py-3 rounded-lg ps-4 focus:placeholder:text-gray-900 ${input.name === `adminDatabase` ? "pointer-events-none bg-gray-800/10" : ""}"
               placeholder="${input.placeholder}"
               name="${input.name}"
               data-selector="true"
-              ${input.name === `adminDatabase` ? `value="${business.user.userFirstNames}"` : ''}
+              ${input.name === `adminDatabase` ? `value="${business.user.userFirstNames}"` : ""}
             />`
             : `
             <label class="text-lg text-gray-400">
@@ -317,12 +311,14 @@
         titleStep.innerHTML = `
           <div class="flex flex-col items-center gap-10 h-full justify-center">
             <h5>${steps[currentStep].title}</h5>
-            <img src=${steps[currentStep].urlImage} alt="" class="opacity-7 w-80 h-80 mx-auto">
+            <img src=${steps[currentStep].urlImage} alt="" class="opacity-10 w-40 h-40 lg:w-full lg:h-auto mx-auto">
           </div>
         `;
 
-        form.querySelectorAll('div.flex.flex-col.mb-4.gap-3').forEach(input => input.remove())
-        form.classList.add('flex', 'flex-col-reverse')
+        form
+          .querySelectorAll("div.flex.flex-col.mb-4.gap-3")
+          .forEach((input) => input.remove());
+        form.classList.add("flex", "justify-center", "flex-col-reverse");
 
         steps[currentStep].formInformation.forEach((formInput) => {
           form.insertAdjacentElement("afterbegin", renderFormSteps(formInput));
