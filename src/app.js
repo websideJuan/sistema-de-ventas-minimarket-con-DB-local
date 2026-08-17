@@ -1,5 +1,5 @@
 import { Modal } from "./components/modal/modal.js";
-import { auth } from "./scripts/auth.js";
+import { userLogin, session  } from "./scripts/auth.js";
 
 const fetchDatabase = async function () {
   try {
@@ -10,13 +10,13 @@ const fetchDatabase = async function () {
   }
 };
 
-const isLoggin = auth.verifySessionActive();
+const isLoggin = session;
 
 if (!isLoggin) {
   window.location.href = "test.html";
 }
 
-const userActive = JSON.parse(localStorage.getItem("user"));
+const userActive = userLogin()
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 

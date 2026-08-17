@@ -1,35 +1,37 @@
+import {getDatabase} from '../scripts/database.js'
+
 class Auth {
   authToken;
   activeUser;
   activeSession;
   user;
   passUser;
+
   constructor() {
-    this.passUser = "1234";
     this.authToken = "";
     this.activeUser = JSON.parse(localStorage.getItem("activeUser")) || false;
-    this.activeSession = JSON.parse(localStorage.getItem("session")) || false
-    this.user = {
-      username: this.activeUser
-        ? JSON.parse(localStorage.getItem("user")).username
-        : "",
-      passHashUser: "",
-    };
+    this.activeSession = JSON.parse(localStorage.getItem("session")) || false;
+    this.user = JSON.parse(localStorage.getItem('user')) || {};
   }
 
-  loginUser({ username, passHashUser }) {
-    if (passHashUser !== this.passUser) {
+  loginUser({ userEmail, passHashUser }) {
+    const userDatabase = getDatabase('business').user
+    console.log(userDatabase);
+    
+    if (
+      passHashUser !==userDatabase.userCredHas &&
+      userEmail !== userDatabase.userEmail
+    ) {
       return false;
     }
 
+    this.user.username = userDatabase.userFirstNames;
+
     if (this.verifyLoginActive()) {
-      this.user.passHashUser = passHashUser;
       this.initSession(this.user);
       return true;
     }
 
-    this.user.username = username;
-    this.user.passHashUser = passHashUser;
 
     this.initSession(this.user);
     return true;
@@ -40,16 +42,17 @@ class Auth {
     this.activeSession = true;
     this.authToken = "yew736jso";
 
-    localStorage.setItem('session', JSON.stringify(true))
+    localStorage.setItem("token", JSON.stringify(this.authToken));
+    localStorage.setItem("session", JSON.stringify(true));
     localStorage.setItem("activeUser", JSON.stringify(true));
-    localStorage.setItem("user", JSON.stringify({
-      username: user.username,
-      passHashUser: ''
-    }));
+    localStorage.setItem(
+      "user",
+      JSON.stringify(user),
+    );
   }
 
   verifySessionActive() {
-    return this.activeSession
+    return this.activeSession;
   }
 
   verifyLoginActive() {
@@ -57,4 +60,9 @@ class Auth {
   }
 }
 
-export const auth = new Auth();
+const auth = new Auth();
+
+export const session = auth.verifySessionActive();
+export const activeUser = auth.verifyLoginActive();
+export const login = (user) => auth.loginUser(user);
+export const userLogin = () => auth.user;

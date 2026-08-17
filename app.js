@@ -1,4 +1,4 @@
-import { auth } from "./src/scripts/auth.js";
+import { activeUser,login, session, userLogin } from "./src/scripts/auth.js";
 import { Modal } from "./src/components/modal/modal.js";
 
 document.addEventListener("DOMContentLoaded", () => new main());
@@ -15,13 +15,13 @@ const main = class Main {
     this.init();
   }
   init() {
-    if (auth.verifySessionActive()) {
+    if (session) {
       window.location.href = "index.html";
       return;
     }
 
-    if (auth.verifyLoginActive()) {
-      this.userSaveLocal.textContent = auth.user.username;
+    if (activeUser) {
+      this.userSaveLocal.textContent = userLogin().username;
       this.rutClientInput.closest(".w-80.mx-auto").classList.add("hidden");
     }
 
@@ -76,7 +76,7 @@ const main = class Main {
       const valueRutClientInput = this.rutClientInput.value;
       const valuePassHashClientInput = this.passHashClientInput.value;
 
-      const res = auth.loginUser({
+      const res = login({
         username: valueRutClientInput,
         passHashUser: valuePassHashClientInput,
       });

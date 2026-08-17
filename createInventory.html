@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de inventario / Crea tu inventario</title>
+    <link rel="stylesheet" href="main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
@@ -13,25 +14,28 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="bg-gray-50">
+  <body class="bg-gray-50 relative">
     <nav class="text-white lg:absolute w-full border-b border-gray-300">
-      <div class="container mx-auto px-4 lg:px-0">
+      <div class="container mx-auto px-6 lg:px-0">
         <div
           class="flex justify-between items-center py-6 relative z-10 relative"
         >
-          <a href="#" class="text-3xl/7 lg:text-4xl/7 font-bold text-cyan-900"> Inventory </a>
+          <a href="#" class="text-3xl/7 lg:text-4xl/7 font-bold text-cyan-900">
+            Inventory
+          </a>
         </div>
       </div>
     </nav>
-    <main class="h-screen w-full lg:w-7xl lg:mx-auto">
+    <main class="min-h-screen lg:flex lg:items-center lg:justify-center">
       <div
-        class="rounded-lg px-6 lg:px-8 py-8 pb-12 mb-12 flex flex-col gap-6 lg:flex-row lg:justify-center lg:h-full"
+        class="px-6 py-8 flex flex-col gap-6 lg:px-8 lg:flex-row lg:justify-center lg:h-full lg:items-center lg:gap-4"
+        id="containerSteps"
       >
-        <div class="lg:w-xl text-5xl text-gray-400 text-center" id="titleStep">
-          <div class="flex flex-col items-center gap-10 h-full justify-center"></div>
+        <div class="lg:w-sm text-5xl text-gray-400 text-center" id="titleStep">
+          <div class="flex flex-col items-center gap-10 justify-center"></div>
         </div>
 
-        <form class="w-full lg:w-2xl mb-12">
+        <form class="w-full py-12 lg:w-xl lg:mb-0 lg:py-0">
           <div
             class="fixed right-0 w-full left-0 bottom-0 flex justify-center lg:justify-end gap-4 py-4 px-0 lg:px-12 bg-gray-200"
           >
@@ -76,12 +80,6 @@
               type: "text",
             },
             {
-              value: "RUT",
-              name: "userDNI",
-              placeholder: "11.111.111-1",
-              type: "text",
-            },
-            {
               value: "Correo de contacto",
               name: "userEmail",
               placeholder: "example@gmail.com",
@@ -108,15 +106,12 @@
             {
               value: "Tipo de negocio",
               name: "typeBusiness",
-              placeholder: "Minimarket, Botilleria, Etc...",
-              type: "select",
+              type: "radio",
               options: [
-                "Almacén",
                 "Minimarket",
                 "Botillería",
                 "Tiendas de ventas (varios)",
                 "Petshop",
-                "Locales de comida",
               ],
             },
             {
@@ -140,8 +135,8 @@
             {
               value: "Categoria",
               name: "category",
-              placeholder: "Liquidos, Verduras, Panaderia.",
-              type: "text",
+              placeholder: 'Liquidos, Panaderia, etc..',
+              type: "text"
             },
             {
               value: "Nombre del producto",
@@ -229,42 +224,43 @@
             business.config = value;
           }
 
+          if (step >= Object.keys(steps).length - 1) {
+            const timeElement = document.createElement("div");
+            timeElement.classList.add(
+              "fixed",
+              "inset-0",
+              "bg-black/10",
+              "flex",
+              "justify-center",
+              "items-center",
+            );
+            let time = 5;
+            step = 0;
+            localStorage.removeItem("step");
 
-          if(step >= (Object.keys(steps).length - 1)) {
+            document.body.appendChild(timeElement);
 
-            const timeElement = document.createElement('div')
-            timeElement.classList.add('fixed', 'inset-0', 'bg-black/10', 'flex', 'justify-center', 'items-center')
-            let time = 5
-            step = 0
-            localStorage.removeItem('step')
-
-            document.body.appendChild(timeElement)
-
-            const idInterval = setInterval(()=> {
-              time--
+            const idInterval = setInterval(() => {
+              time--;
               timeElement.innerHTML = `
                 <span>
                   Redirigiendo en...
                   ${time}
                   s
                 </span>
-              `
-              if(time === 0) {
-                window.location.href = 'test.html'
-                timeElement.remove()
-                clearInterval(idInterval)
+              `;
+              if (time === 0) {
+                window.location.href = "test.html";
+                timeElement.remove();
+                clearInterval(idInterval);
               }
-            },1000 )
-
+            }, 1000);
           } else {
-
             step++;
             localStorage.setItem("step", step);
-            localStorage.setItem("business", JSON.stringify(business));
           }
 
-
-
+          localStorage.setItem("business", JSON.stringify(business));
           updateUI(step);
         });
       });
@@ -273,10 +269,16 @@
         const business = JSON.parse(localStorage.getItem("business"));
 
         const formControl = document.createElement("div");
-        formControl.classList.add("flex", "flex-col", "mb-4", "gap-3");
+        formControl.classList.add(
+          "flex",
+          "flex-col",
+          "mb-4",
+          "gap-3",
+          "relative",
+        );
 
         formControl.innerHTML +=
-          input.type !== "select"
+          input.type !== "radio"
             ? `
             <label for="${input.name}" class="text-lg text-gray-400">
               ${input.value} <span class="text-gray-900">(*)</span>
@@ -288,41 +290,87 @@
               name="${input.name}"
               data-selector="true"
               ${input.name === `adminDatabase` ? `value="${business.user.userFirstNames}"` : ""}
-            />`
+            />
+              ${
+                input.type === `password`
+                  ? `
+                  <div class="absolute inset-0 flex justify-end items-end pointer-events-none">
+                    <button type="button" class="p-4 py-3 border-s border-gray-400 pointer-events-auto text-gray-400 active:text-gray-900">
+                      <i class="fa-regular fa-eye-slash" data-id="revealPass"></i>
+                    </button>
+                  </div>
+                `
+                  : ""
+              }
+            `
             : `
-            <label class="text-lg text-gray-400">
-              ${input.value} <span class="text-gray-900">(*)</span>
-            </label>
-            <select 
-              class="border border-gray-500 py-3 rounded-lg ps-4 text-gray-400 focus:text-gray-900"
-              for="${input.name}" 
-              data-selector="true" 
-              name="${input.name}"
-            >
-              <option value="">-- Selecciona un tipo de negocio --</option>
-              ${input.options.map((option) => `<option value="${option}">${option}</option>`)}
-            </select>
-              `;
+            <h5>
+              Seleccione la categoria.
+            </h5>
+            
+              ${input.options
+                .map(
+                  (option) => `
+                  <label class="text-lg text-gray-400" name="${input.type}">
+                    <input
+                      type="radio"
+                      class="border border-gray-500 py-3 rounded-lg ps-4 text-gray-400 focus:text-gray-900"
+                      for="${input.type}" 
+                      data-selector="true" 
+                      name="${input.name}"
+                      value="${option}"
+                    >
+                    <span>${option}</span>
+                  </label>
+                `,
+                )
+                .join("")}
+          
+            `;
+
+        formControl.addEventListener("click", (e) => {
+          if (e.target.dataset.id === "revealPass") {
+            const isChange = e.target.classList.toggle("text-gray-900");
+            console.log(isChange);
+            e.target.setAttribute(
+              "class",
+              isChange
+                ? "fa-regular fa-eye text-gray-900"
+                : "fa-regular fa-eye-slash",
+            );
+
+            formControl
+              .querySelector("input")
+              .setAttribute("type", isChange ? "text" : "password");
+            console.log(e.target);
+          }
+        });
 
         return formControl;
       };
 
       const updateUI = (currentStep) => {
         titleStep.innerHTML = `
-          <div class="flex flex-col items-center gap-10 h-full justify-center">
+          <div class="flex flex-col items-center gap-10 justify-center">
             <h5>${steps[currentStep].title}</h5>
-            <img src=${steps[currentStep].urlImage} alt="" class="opacity-10 w-40 h-40 lg:w-full lg:h-auto mx-auto">
+            <img src=${steps[currentStep].urlImage} alt="${steps[currentStep].title}" class="opacity-30 w-40 h-40 lg:w-full lg:h-auto">
           </div>
         `;
 
         form
           .querySelectorAll("div.flex.flex-col.mb-4.gap-3")
           .forEach((input) => input.remove());
-        form.classList.add("flex", "justify-center", "flex-col-reverse");
+        form.classList.add("flex", "flex-col", "justify-center");
 
         steps[currentStep].formInformation.forEach((formInput) => {
-          form.insertAdjacentElement("afterbegin", renderFormSteps(formInput));
+          form.appendChild(renderFormSteps(formInput));
         });
+
+        CONTAINERSTEPS.classList.add("animate-transition");
+
+        setTimeout(() => {
+          CONTAINERSTEPS.classList.remove("animate-transition");
+        }, 4000);
       };
 
       const createModal = ({ title, text }) => {

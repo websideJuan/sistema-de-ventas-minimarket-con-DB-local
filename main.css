@@ -11,3 +11,16 @@ body {
   height: calc(100vh - 430px);
   overflow-y: auto;
 }
+
+
+@keyframes appear {
+  from {transform: translate(-100%);}
+  to {transform: translate(0%);}
+}
+
+.animate-transition {
+  animation-name: appear;
+  transform: translate(-100%);
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
