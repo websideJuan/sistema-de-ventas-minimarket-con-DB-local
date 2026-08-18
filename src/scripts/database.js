@@ -1,21 +1,39 @@
 class DataBase {
   currentDataBase;
+  error;
+  typeError;
+  dataBase;
   constructor() {
     this.dataBase = localStorage;
+    this.currentDataBase = JSON.parse(localStorage.getItem('business')) || [];
+    this.error = false;
+    this.typeError = "";
   }
 
   GET(business) {
-    this.currentDataBase = JSON.parse(this.dataBase.getItem(business));
-
     if (this.currentDataBase === null) {
-      throw new Error("local database is not define");
+      this.error = true;
+      this.typeError = "local database is not define";
+      throw new Error(this.typeError);
     }
-
     return this.currentDataBase;
   }
 
-  POST(businees = "", database = {}) {
-    this.dataBase.setItem(businees, JSON.stringify(database));
+  POST(business = "", database = {}) {
+    this.currentDataBase = this.GET(business);
+
+    if (this.errors) {
+      throw new Error(this.typeError);
+    }
+
+    this.currentDataBase.push({
+      ...database,
+      id: crypto.randomUUID(),
+      createdAt: '',
+      updatedAt: ''
+    })
+
+    this.dataBase.setItem(business, JSON.stringify(this.currentDataBase));
 
     return true;
   }
@@ -27,7 +45,7 @@ class DataBase {
 
 const connect = new DataBase();
 
-export const createDatabase = ({ business, database }) =>
+export const createDatabase = (business, database ) =>
   connect.POST(business, database);
 
-export const getDatabase = (business) => connect.GET(business)
+export const getDatabase = (business) => connect.GET(business);

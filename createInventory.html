@@ -56,12 +56,20 @@
       </div>
     </main>
 
-    <script>
+    <script type="module">
+      import { createDatabase } from "./src/scripts/database.js";
       const CONTAINERSTEPS = document.querySelector("#containerSteps");
       const titleStep = document.querySelector("#titleStep");
       const form = document.querySelector("form");
 
       let step = Number(localStorage.getItem("step")) || 0;
+
+      const business = {
+        user: {},
+        businessInformation: [],
+        listProducts: [],
+        config: [],
+      };
 
       const steps = [
         {
@@ -135,8 +143,8 @@
             {
               value: "Categoria",
               name: "category",
-              placeholder: 'Liquidos, Panaderia, etc..',
-              type: "text"
+              placeholder: "Liquidos, Panaderia, etc..",
+              type: "text",
             },
             {
               value: "Nombre del producto",
@@ -178,13 +186,6 @@
           let error = false;
           let value = {};
 
-          const business = JSON.parse(localStorage.getItem("business")) || {
-            user: {},
-            businessInformation: [],
-            listProducts: [],
-            config: [],
-          };
-
           document
             .querySelectorAll("[data-selector='true']")
             .forEach((INPUT) => {
@@ -206,68 +207,38 @@
             return;
           }
 
-          if (step === 0) {
-            business.user = {
-              ...value,
-              role: "admin",
-              createdAdd: [
-                new Date().getDate(),
-                new Date().getMonth() + 1,
-                new Date().getFullYear(),
-              ].join("/"),
-            };
-          } else if (step === 1) {
-            business.businessInformation = value;
-          } else if (step === 2) {
-            business.listProducts = value;
-          } else if (step === 3) {
-            business.config = value;
-          }
+          const listKeys = [
+            "user",
+            "businessInformation",
+            "listProducts",
+            "config",
+          ];
 
-          if (step >= Object.keys(steps).length - 1) {
-            const timeElement = document.createElement("div");
-            timeElement.classList.add(
-              "fixed",
-              "inset-0",
-              "bg-black/10",
-              "flex",
-              "justify-center",
-              "items-center",
-            );
-            let time = 5;
-            step = 0;
-            localStorage.removeItem("step");
+          business[listKeys[step]] = value;
 
-            document.body.appendChild(timeElement);
+          business.user = {
+            ...business.user,
+            role: "admin",
+            createdAdd: [
+              new Date().getDate(),
+              new Date().getMonth() + 1,
+              new Date().getFullYear(),
+            ].join("/"),
+          };
 
-            const idInterval = setInterval(() => {
-              time--;
-              timeElement.innerHTML = `
-                <span>
-                  Redirigiendo en...
-                  ${time}
-                  s
-                </span>
-              `;
-              if (time === 0) {
-                window.location.href = "test.html";
-                timeElement.remove();
-                clearInterval(idInterval);
-              }
-            }, 1000);
+          step++;
+          localStorage.setItem("step", step);
+
+          if (step >= listKeys.length) {
+            createDatabase("business", business);
+            window.location.href = 'test.html'
           } else {
-            step++;
-            localStorage.setItem("step", step);
+            updateUI(step);
           }
-
-          localStorage.setItem("business", JSON.stringify(business));
-          updateUI(step);
         });
       });
 
       const renderFormSteps = (input) => {
-        const business = JSON.parse(localStorage.getItem("business"));
-
         const formControl = document.createElement("div");
         formControl.classList.add(
           "flex",
@@ -331,7 +302,7 @@
         formControl.addEventListener("click", (e) => {
           if (e.target.dataset.id === "revealPass") {
             const isChange = e.target.classList.toggle("text-gray-900");
-            console.log(isChange);
+
             e.target.setAttribute(
               "class",
               isChange
@@ -342,7 +313,6 @@
             formControl
               .querySelector("input")
               .setAttribute("type", isChange ? "text" : "password");
-            console.log(e.target);
           }
         });
 

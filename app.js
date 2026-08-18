@@ -9,7 +9,7 @@ const main = class Main {
     this.menuToggle = document.querySelector("#menuToggle");
     this.userSaveLocal = document.querySelector("#userSaveLocal");
     this.loginUser = document.querySelector("#loginUser");
-    this.rutClientInput = document.querySelector("#rutClient");
+    this.userEmail = document.querySelector("#userEmail");
     this.passHashClientInput = document.querySelector("#passHashClient");
     this.btnFormLogin = document.querySelector("#btnFormLogin");
     this.init();
@@ -22,7 +22,7 @@ const main = class Main {
 
     if (activeUser) {
       this.userSaveLocal.textContent = userLogin().username;
-      this.rutClientInput.closest(".w-80.mx-auto").classList.add("hidden");
+      this.userEmail.closest(".w-80.mx-auto").classList.add("hidden");
     }
 
     const resetForm = (form) => {
@@ -32,13 +32,13 @@ const main = class Main {
 
     const verifyInputValue = ({ name, value }) => {
       if (value.trim().length === 0 || value.trim() === "") {
-        this.rutClientInput.classList.add("outline-red-400", "text-red-400");
+        this.userEmail.classList.add("outline-red-400", "text-red-400");
         this.passHashClientInput.classList.add(
           "outline-red-400",
           "text-red-400",
         );
       } else {
-        this.rutClientInput.classList.remove("outline-red-400", "text-red-400");
+        this.userEmail.classList.remove("outline-red-400", "text-red-400");
         this.passHashClientInput.classList.remove(
           "outline-red-400",
           "text-red-400",
@@ -46,14 +46,14 @@ const main = class Main {
       }
     };
 
-    [this.rutClientInput, this.passHashClientInput].forEach((input, i) => {
+    [this.userEmail, this.passHashClientInput].forEach((input, i) => {
       input.addEventListener("input", (e) => {
         if (
           i ===
-          [this.rutClientInput, this.passHashClientInput].filter((input) =>
+          [this.userEmail, this.passHashClientInput].filter((input) =>
             input.closest(".w-80.mx-auto").classList.contains("hidden")
               ? input.closest(".w-80.mx-auto").classList.contains("hidden")
-              : [this.rutClientInput, this.passHashClientInput],
+              : [this.userEmail, this.passHashClientInput],
           ).length -
             1
         ) {
@@ -73,11 +73,11 @@ const main = class Main {
 
     this.loginUser.addEventListener("submit", (e) => {
       e.preventDefault();
-      const valueRutClientInput = this.rutClientInput.value;
+      const valueRutClientInput = this.userEmail.value;
       const valuePassHashClientInput = this.passHashClientInput.value;
 
       const res = login({
-        username: valueRutClientInput,
+        userEmail: valueRutClientInput,
         passHashUser: valuePassHashClientInput,
       });
 
