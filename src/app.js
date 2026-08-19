@@ -774,6 +774,7 @@ document.querySelector("#checkDeletAll").addEventListener("input", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+
   if (!JSON.parse(localStorage.getItem("dataDailySale"))) {
     const badgeNotification = document.querySelector(
       'div[data-id="badgeNotification"]',
@@ -782,6 +783,11 @@ document.addEventListener("DOMContentLoaded", () => {
     badgeNotification.classList.remove("hidden");
     startTheSalesDay();
   }
+
+  console.log(userActive);
+  
+
+  document.querySelector('#businessName').textContent = isLoggin ? userActive.businessName : 'LOGOTIPO'
 
   renderCartItem();
 });

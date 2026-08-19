@@ -14,44 +14,28 @@ class Auth {
     this.user = JSON.parse(localStorage.getItem("user")) || {};
   }
 
-  loginUser({ userEmail, passHashUser }) {
-    const userDatabase = getDatabase("business");
-    const userFounded = userDatabase.find((business) => business.user.userEmail === userEmail);
-    
+  login(isLoggin) {
+    if (!isLoggin) return false;
 
-    if (userFounded === undefined) {
-      return false;
-    }
-
-    if (
-      passHashUser !== userFounded.user.userCredHas ||
-      userEmail !== userFounded.user.userEmail
-    ) {
-      return false;
-    }
-
-    
     if (this.verifyLoginActive()) {
       this.initSession(this.user);
       return true;
     }
 
-    this.user.username = userFounded.user.userFirstNames;
-    this.user.userEmail = userFounded.user.userEmail;
-    
     this.initSession(this.user);
     return true;
   }
 
-  initSession(user) {
-    this.activeUser = true;
-    this.activeSession = true;
+  initSession(started) {
+    this.activeUser = started;
+    this.activeSession = started;
+    
     this.authToken = "yew736jso";
-
-    localStorage.setItem("token", JSON.stringify(this.authToken));
-    localStorage.setItem("session", JSON.stringify(true));
-    localStorage.setItem("activeUser", JSON.stringify(true));
-    localStorage.setItem("user", JSON.stringify({ username: user.username }));
+    // localStorage.setItem("token", JSON.stringify(this.authToken));
+    
+    localStorage.setItem("session", JSON.stringify(this.activeSession));
+    localStorage.setItem("activeUser", JSON.stringify(this.activeUser));
+    localStorage.setItem("user", JSON.stringify(this.user));
   }
 
   verifySessionActive() {
@@ -64,8 +48,45 @@ class Auth {
 }
 
 const auth = new Auth();
+const userDatabase = getDatabase("business");
 
 export const session = auth.verifySessionActive();
 export const activeUser = auth.verifyLoginActive();
-export const login = (user) => auth.loginUser(user);
+
+export const loginForEmail = (credenctials) => {
+  const userFounded = userDatabase.find((business) =>
+    credenctials.userEmail !== ""
+      ? business.user.userEmail === credenctials.userEmail
+      : business.user.userEmail === auth.user.userEmail,
+  );
+
+  const isValidCredential = validateOfCredentials(
+    credenctials,
+    userFounded.user,
+  );
+
+  auth.user = {
+    username: userFounded.user.userFirstNames,
+    userEmail: userFounded.user.userEmail,
+    businessName: userFounded.businessInformation.businessName,
+  };
+
+  return auth.login(isValidCredential);
+};
+
+const validateOfCredentials = (credenctials, userFounded) => {
+  let isValidcredentials = false;
+  Object.keys(credenctials).forEach((keyCredetial) => {
+    if (Object.keys(userFounded).includes(keyCredetial)) {
+      if (credenctials[keyCredetial] !== userFounded[keyCredetial]) {
+        isValidcredentials = false;
+      } else {
+        isValidcredentials = true;
+      }
+    }
+  });
+  return isValidcredentials;
+};
+
+export const loginForDNI = (credenctials) => auth.login(false);
 export const userLogin = () => auth.user;

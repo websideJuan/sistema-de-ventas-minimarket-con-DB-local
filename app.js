@@ -1,4 +1,4 @@
-import { activeUser,login, session, userLogin } from "./src/scripts/auth.js";
+import { activeUser, loginForEmail, session, userLogin } from "./src/scripts/auth.js";
 import { Modal } from "./src/components/modal/modal.js";
 
 document.addEventListener("DOMContentLoaded", () => new main());
@@ -76,9 +76,9 @@ const main = class Main {
       const valueRutClientInput = this.userEmail.value;
       const valuePassHashClientInput = this.passHashClientInput.value;
 
-      const res = login({
+      const res = loginForEmail({
         userEmail: valueRutClientInput,
-        passHashUser: valuePassHashClientInput,
+        userCredHas: valuePassHashClientInput,
       });
 
       if (!res) {
